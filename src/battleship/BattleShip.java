@@ -25,6 +25,7 @@ public class BattleShip extends JFrame implements Runnable {
     
     final int numRows = 10;
     final int numColumns = 10;
+    final int borderlength = 100;
     
     boolean startMenu;
     
@@ -170,17 +171,24 @@ public class BattleShip extends JFrame implements Runnable {
         
         
         
-//drawing lines
+//drawing horizontal lines
+//        for (int zi=1;zi<numRows;zi++)
+//        {
+//            g.drawLine(getX(borderlength) ,getY(250)+zi*(getHeight2()-250)/numRows ,
+//            getX(borderlength+(getWidth2()-borderlength*3)/2) ,getY(250)+zi*(getHeight2()-250)/numRows );
+//        }
         for (int zi=1;zi<numRows;zi++)
         {
-            g.drawLine(getX(20) ,getY(80)+zi*getHeight2()/numRows ,
-            getX(90) ,getY(0)+zi*getHeight2()/numRows );
+            g.drawLine(getX(borderlength) ,
+                    getY(250)+zi*(getHeight2()-250)/numRows ,
+                    getX(borderlength+(getWidth2()-borderlength*3)/2),
+                    getY(250)+zi*(getHeight2()-250)/numRows );
         }
-        for (int zi=1;zi<numColumns;zi++)
-        {
-            g.drawLine(getX(0)+zi*getWidth2()/numColumns ,getY(0) ,
-            getX(0)+zi*getWidth2()/numColumns,getY(getHeight2())  );
-        }
+//        for (int zi=1;zi<numColumns;zi++)
+//        {
+//            g.drawLine(getX(0)+zi*getWidth2()/numColumns ,getY(0) ,
+//            getX(0)+zi*getWidth2()/numColumns,getY(getHeight2())  );
+//        }
 
         
         gOld.drawImage(image, 0, 0, null);
