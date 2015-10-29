@@ -5,7 +5,7 @@
 package battleship;
 
 enum Type{
-    AirCraftCarrier
+    AirCraftCarrier,BattleCarrier,StandardShip,Floater,Pontoon
 }
 public class Ship {
     private int size;
