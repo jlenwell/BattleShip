@@ -13,6 +13,7 @@ public class Ship {
     {
         size = _size;
     }
+    public void
     public int getsize(){
         return size;
     }
