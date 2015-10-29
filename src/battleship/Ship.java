@@ -4,10 +4,9 @@
  */
 package battleship;
 
-/**
- *
- * @author 373000836
- */
+enum Type{
+    AirCraftCarrier
+}
 public class Ship {
     private int size;
     Ship(int _size)
