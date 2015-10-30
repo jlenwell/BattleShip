@@ -153,7 +153,7 @@ public class BattleShip extends JFrame implements Runnable {
             gOld.drawImage(image, 0, 0, null);
             return;
         }
-
+          
         g.setColor(Color.ORANGE);
 //horizontal lines
 //        for (int zi=1;zi<numRows;zi++)
