@@ -4,10 +4,12 @@
  */
 package battleship;
 
-enum Type{
-    AirCraftCarrier,BattleCarrier,StandardShip,Floater,Pontoon
-}
+
+
 public class Ship {
+    enum Type{
+    AirCraftCarrier,BattleCarrier,StandardShip,Floater,Pontoon  
+}
     private int size;
     Ship(int _size)
     {
