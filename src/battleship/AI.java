@@ -4,13 +4,15 @@
  */
 package battleship;
 
-public class AI {
+public static class AI {
     public enum Difficulty{
         easy,hard
     }
     Difficulty difficulty;
+    boolean hunt;
     AI(Difficulty _hardness){
         difficulty = _hardness;
+        hunt = true;
     }    
     public void fire(Ship[][] board){
         if(difficulty==Difficulty.easy)
@@ -29,5 +31,28 @@ public class AI {
 //            col = (int)(Math.random()*board[row].length);
 //        }
 //        while(board[row][col].getType() == Ship.Type.Miss);
+    }
+    private void fireHard(Ship[][] board)
+    {
+        int row;
+        int col;
+        if(hunt)
+        {
+            do
+            {
+                row = (int)(Math.random()*board.length);
+                col = (int)(Math.random()*board[row].length);
+            }
+            while(board[row][col].getType() != Ship.Type.Miss);
+        }
+        else{
+            do
+            {
+                row = (int)(Math.random()*board.length);
+                col = (int)(Math.random()*board[row].length);
+            }
+            while(board[row][col].getType() != Ship.Type.Miss && 
+                  board[row][col])
+        }
     }
 }
