@@ -25,7 +25,8 @@ public class BattleShip extends JFrame implements Runnable {
     
     final int numRows = 10;
     final int numColumns = 10;
-    final int borderlength = 100;
+    final int sideborderlength = 100;
+    final int topborderlength = 100;
     
     boolean startMenu;
     
@@ -171,26 +172,32 @@ public class BattleShip extends JFrame implements Runnable {
         
         
         
-//drawing horizontal lines
+////drawing horizontal lines
 //        for (int zi=1;zi<numRows;zi++)
 //        {
 //            g.drawLine(getX(borderlength) ,getY(250)+zi*(getHeight2()-250)/numRows ,
 //            getX(borderlength+(getWidth2()-borderlength*3)/2) ,getY(250)+zi*(getHeight2()-250)/numRows );
 //        }
-        for (int zi=1;zi<numRows;zi++)
+        for (int r=1;r<numRows;r++)
         {
-            g.drawLine(getX(borderlength) ,
-                    getY(250)+zi*(getHeight2()-250)/numRows ,
-                    getX(borderlength+(getWidth2()-borderlength*3)/2),
-                    getY(250)+zi*(getHeight2()-250)/numRows );
+            g.drawLine(getX(sideborderlength) ,
+                    getY(250)+r*(getHeight2()-250)/numRows ,
+                    getX(sideborderlength+(getWidth2()-sideborderlength*3)/2),
+                    getY(250)+r*(getHeight2()-250)/numRows );
         }
-        for(int zi=1;zi<numColumns;zi++)
+        for (int c=1;c<numColumns;c++)
         {
-            g.drawLine(getX(borderlength) ,
-                    getY(250)+zi*(getHeight2()-250)/numColumns ,
-                    getX(borderlength+(getWidth2()-borderlength*3)/2),
-                    getY(250)+zi*(getHeight2()-250)/numColumns );
+            g.drawLine(getX(sideborderlength) ,
+                    getY(250)+c*(getWidth2()-250)/numColumns ,
+                    getX(sideborderlength+(getHeight2()-sideborderlength*3)/2),
+                    getY(250)+c*(getWidth2()-250)/numColumns );
         }
+//        for(int c=1;c<numColumns;c++)
+//        {
+//            g.drawLine(getX(0)
+//                    +c*getWidth2()/numColumns ,getY(0) ,
+//            getX(0)+c*getWidth2()/numColumns,getY(getHeight2()));  
+//        }
 //        for (int zi=1;zi<numColumns;zi++)
 //        {
 //            g.drawLine(getX(0)+zi*getWidth2()/numColumns ,getY(0) ,
