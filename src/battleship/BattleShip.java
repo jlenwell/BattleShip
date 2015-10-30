@@ -154,7 +154,7 @@ public class BattleShip extends JFrame implements Runnable {
             gOld.drawImage(image, 0, 0, null);
             return;
         }
-
+          
         g.setColor(Color.ORANGE);
 //horizontal lines
 //        for (int zi=1;zi<numRows;zi++)
@@ -226,8 +226,8 @@ public class BattleShip extends JFrame implements Runnable {
         player1 = new Ship[numShips];
         player2 = new Ship[numShips];
         for(int index=0;index<numShips;index++){
-            player1[index]=new Ship(index+1);
-            player1[index]=new Ship(index+1);
+            player1[index]=new Ship(index+1,Ship.Type.BattleCarrier);
+            player1[index]=new Ship(index+1,Ship.Type.Floater);
         }
         
     }
