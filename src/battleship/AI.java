@@ -12,17 +12,21 @@ public class AI {
     AI(Difficulty _hardness){
         difficulty = _hardness;
     }    
-//    public void fire(Ship[] board){
-//        if(difficulty==Difficulty.easy)
-//        {
-//            fireEasy(board);
-//        }
-//    }
-//    private void fireEasy(Ship[] board)
-//    {
+    public void fire(Ship[][] board){
+        if(difficulty==Difficulty.easy)
+        {
+            fireEasy(board);
+        }
+    }
+    private void fireEasy(Ship[][] board)
+    {
+        int row;
+        int col;
 //        do
 //        {
-//            
-//        }while()
-//    }
+//            row = (int)(Math.random()*board.length);
+//            col = (int)(Math.random()*board[row].length);
+//        }
+//        while(board[row][col].get);
+    }
 }
