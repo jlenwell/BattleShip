@@ -24,13 +24,14 @@ public static class AI {
     {
         int row;
         int col;
-        //uncomment the below lines when ship is up to date
-//        do
-//        {
-//            row = (int)(Math.random()*board.length);
-//            col = (int)(Math.random()*board[row].length);
-//        }
-//        while(board[row][col].getType() == Ship.Type.Miss);
+//        uncomment the below lines when ship is up to date
+        do
+        {           
+            row = (int)(Math.random()*board.length);
+            col = (int)(Math.random()*board[row].length);
+        }
+        while(board[row][col].getType() == Ship.Type.Miss &&
+              !board[row][col].getHit());
     }
     private void fireHard(Ship[][] board)
     {
@@ -38,21 +39,18 @@ public static class AI {
         int col;
         if(hunt)
         {
-            do
-            {
-                row = (int)(Math.random()*board.length);
-                col = (int)(Math.random()*board[row].length);
-            }
-            while(board[row][col].getType() != Ship.Type.Miss);
+            fireEasy(board);
         }
-        else{
+        else
+        {
             do
             {
                 row = (int)(Math.random()*board.length);
                 col = (int)(Math.random()*board[row].length);
             }
             while(board[row][col].getType() != Ship.Type.Miss && 
-                  board[row][col])
+                  !board[row][col].getHit() &&
+                  )
         }
     }
 }
