@@ -218,8 +218,8 @@ public class BattleShip extends JFrame implements Runnable {
         player1 = new Ship[numShips];
         player2 = new Ship[numShips];
         for(int index=0;index<numShips;index++){
-            player1[index]=new Ship(index+1);
-            player1[index]=new Ship(index+1);
+            player1[index]=new Ship(index+1,Ship.Type.BattleCarrier);
+            player1[index]=new Ship(index+1,Ship.Type.Floater);
         }
         
     }
