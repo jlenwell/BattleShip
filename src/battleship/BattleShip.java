@@ -26,7 +26,7 @@ public class BattleShip extends JFrame implements Runnable {
     final int numRows = 10;
     final int numColumns = 10;
     final int sideborderlength = 100;
-    final int topborderlength = 100;
+    final int topborderlength = 300;
     
     boolean startMenu;
     
@@ -168,30 +168,7 @@ public class BattleShip extends JFrame implements Runnable {
 //        {
 //            g.drawLine(getX(0)+zi*getWidth2()/numColumns ,getY(0) ,
 //            getX(0)+zi*getWidth2()/numColumns,getY(getHeight2())  );
-//        }
-        
-        
-        
-////drawing horizontal lines
-//        for (int zi=1;zi<numRows;zi++)
-//        {
-//            g.drawLine(getX(borderlength) ,getY(250)+zi*(getHeight2()-250)/numRows ,
-//            getX(borderlength+(getWidth2()-borderlength*3)/2) ,getY(250)+zi*(getHeight2()-250)/numRows );
-//        }
-//        for (int r=1;r<numRows;r++)
-//        {
-//            g.drawLine(getX(sideborderlength) ,
-//                    getY(250)+r*(getHeight2()-250)/numRows ,
-//                    getX(sideborderlength+(getWidth2()-sideborderlength*3)/2),
-//                    getY(250)+r*(getHeight2()-250)/numRows );
-//        }
-//        for (int c=1;c<numColumns;c++)
-//        {
-//            g.drawLine(getX(sideborderlength) ,
-//                    getY(250)+c*(getWidth2()-250)/numColumns ,
-//                    getX(sideborderlength+(getHeight2()-sideborderlength*3)/2),
-//                    getY(250)+c*(getWidth2()-250)/numColumns );
-//        }
+//        }   
 //horizontal lines
         for (int zi=1;zi<numRows;zi++)
         {
@@ -201,9 +178,12 @@ public class BattleShip extends JFrame implements Runnable {
 //vertical lines
         for (int zi=1;zi<numColumns;zi++)
         {
-            g.drawLine(getX(0)+zi*getWidth2()/numColumns ,getY(0) ,
-            getX(0)+zi*getWidth2()/numColumns,getY(getHeight2())  );
+            g.drawLine(getX(250)+zi*getWidth2()/numColumns ,getY(topborderlength) ,
+            getX(topborderlength)+zi*getWidth2()/numColumns,getY(getHeight2()));
         }
+        g.setColor(Color.black);
+        g.fillRect(getWidth2()/2, getY(getHeight2()/3), getWidth2()/40, getHeight2()*3/4);
+        
         
         
 //        for(int c=1;c<numColumns;c++)
