@@ -15,8 +15,8 @@ public class BattleShip extends JFrame implements Runnable {
     static final int YBORDER = 20;
     static final int YTITLE = 30;
     static final int WINDOW_BORDER = 8;
-    static final int WINDOW_WIDTH = 2*(WINDOW_BORDER + XBORDER) + 1400;
-    static final int WINDOW_HEIGHT = YTITLE + WINDOW_BORDER + 2 * YBORDER + 800;
+    static final int WINDOW_WIDTH = 2*(WINDOW_BORDER + XBORDER) + 1600;
+    static final int WINDOW_HEIGHT = YTITLE + WINDOW_BORDER + 2 * YBORDER + 900;
     boolean animateFirstTime = true;
     int xsize = -1;
     int ysize = -1;
@@ -155,7 +155,7 @@ public class BattleShip extends JFrame implements Runnable {
             return;
         }
           
-        g.setColor(Color.ORANGE);
+        g.setColor(Color.BLACK);
 //horizontal lines
 //        for (int zi=1;zi<numRows;zi++)
 //        {
@@ -177,19 +177,28 @@ public class BattleShip extends JFrame implements Runnable {
 //            g.drawLine(getX(borderlength) ,getY(250)+zi*(getHeight2()-250)/numRows ,
 //            getX(borderlength+(getWidth2()-borderlength*3)/2) ,getY(250)+zi*(getHeight2()-250)/numRows );
 //        }
-        for (int zi=1;zi<numRows;zi++)
+   for (int z=0;z<numColumns;z++)
+   {      
+        for (int zi=0;zi<numRows+2;zi++)
         {
             g.drawLine(getX(borderlength) ,
-                    getY(250)+zi*(getHeight2()-250)/numRows ,
-                    getX(borderlength+(getWidth2()-borderlength*3)/2),
-                    getY(250)+zi*(getHeight2()-250)/numRows );
+             getY(220)+zi*(getHeight2()-250)/numRows ,
+             getX(borderlength+(getWidth2()-borderlength*3)/2),
+             getY(220)+zi*(getHeight2()-250)/numRows );
+            
+            g.drawLine(getX(borderlength) ,
+             getY(220)+zi*(getHeight2()-250)/numRows ,
+             getX(borderlength+(getWidth2()-borderlength*3)/1),
+             getY(220)+zi*(getHeight2()-250)/numRows );
+          
+            g.drawLine(getX(0)+z*getWidth2()/numColumns ,getY(0) ,
+            getX(0)+z*getWidth2()/numColumns,getY(getHeight2())  );
+       
         }
-//        for (int zi=1;zi<numColumns;zi++)
-//        {
-//            g.drawLine(getX(0)+zi*getWidth2()/numColumns ,getY(0) ,
-//            getX(0)+zi*getWidth2()/numColumns,getY(getHeight2())  );
-//        }
-
+   }   
+            g.drawLine(getX(0)+5*getWidth2()/numColumns ,getY(0) ,
+            getX(0)+5*getWidth2()/numColumns,getY(getHeight2())  );
+       
         
         gOld.drawImage(image, 0, 0, null);
     }
