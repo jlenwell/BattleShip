@@ -47,6 +47,7 @@ public static class AI {
 //        else
 //        {
 //            board[row][col].Shot();
+//            hunt = false;
 //        }
     }
     private void fireHard(Ship[][] board)
