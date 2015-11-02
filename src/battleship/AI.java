@@ -4,7 +4,7 @@
  */
 package battleship;
 
-public static class AI {
+public class AI {
     public enum Difficulty{
         Easy,Medium,Hard
     }
@@ -18,9 +18,13 @@ public static class AI {
         difficulty = Difficulty.Easy;
         hunt = true;
     }
-    public void changeDifficultyTo(Difficulty _difficulty)
+    public void setDifficulty(Difficulty _difficulty)
     {
         difficulty = _difficulty;
+    }
+    public Difficulty getDifficulty()
+    {
+        return difficulty;
     }
     public void fire(Ship[][] board){
         if(difficulty==Difficulty.Easy)
@@ -42,29 +46,29 @@ public static class AI {
         int col;
         int bugChecker = 0;
 ////////////uncomment the below lines when ship is up to date
-//        do
-//        {           
-//            row = (int)(Math.random()*board.length);
-//            col = (int)(Math.random()*board[row].length);
-//            bugChecker++;
-//        }
-//        while(!(board[row][col] == null || (board[row][col]  != null && board[row][col].getType() != Ship.Type.Miss &&
-//              !board[row][col].getHit() ))  || bugChecker >= 100);
-//        lastRow = row;
-//        lastColumn = col;
-//        if(board[row][col] == null)
-//        {
-//            board[row][col] = new Ship(Ship.Miss);
-//        }
-//        else if( board[row][col].getType() != Ship.Type.Miss && !board[row][col].getHit)
-//        {
-//            board[row][col].Shot();
-//            hunt = false;
-//        }
+        do
+        {           
+            row = (int)(Math.random()*board.length);
+            col = (int)(Math.random()*board[row].length);
+            bugChecker++;
+        }
+        while(!(board[row][col] == null || (board[row][col]  != null && board[row][col].getType() != Ship.Type.Miss &&
+              !board[row][col].getHit() ))  || bugChecker >= 100);
+        lastRow = row;
+        lastColumn = col;
+        if(board[row][col] == null)
+        {
+            board[row][col] = new Ship(0,Ship.Type.Miss);
+        }
+        else if( board[row][col].getType() != Ship.Type.Miss && !board[row][col].getHit())
+        {
+            board[row][col].shoot();
+            hunt = false;
+        }
     }
     private void fireMedium(Ship[][] board)
     {
-        fireEasy();
+        fireEasy(board);
     }
     private void fireHard(Ship[][] board)
     {
@@ -75,18 +79,18 @@ public static class AI {
         {
             fireEasy(board);
         }
-        else
-        {
-            do
-            {
-                row = (int)(Math.random()*board.length);
-                col = (int)(Math.random()*board[row].length);
-                bugChecker++;
-            }
-            while(!(board[row][col] == null || (board[row][col]  != null && board[row][col].getType() != Ship.Type.Miss &&
-                  !board[row][col].getHit())) && 
-                  (col>= lastColumn-1 && col<=lastColumn+1 && row>= lastRow-1 && row<=lastRow+1) ||
-                  bugChecker >= 100)
-        }
+//        else
+//        {
+//            do
+//            {
+//                row = (int)(Math.random()*board.length);
+//                col = (int)(Math.random()*board[row].length);
+//                bugChecker++;
+//            }
+//            while(!(board[row][col] == null || (board[row][col]  != null && board[row][col].getType() != Ship.Type.Miss &&
+//                  !board[row][col].getHit())) && 
+//                  (col>= lastColumn-1 && col<=lastColumn+1 && row>= lastRow-1 && row<=lastRow+1) ||
+//                  bugChecker >= 100)
+//        }
     }
 }

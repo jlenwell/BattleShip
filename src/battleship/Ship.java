@@ -57,4 +57,7 @@ public class Ship{
     public boolean getHit(){
         return hits[spot];
     }
+    public void shoot(){
+        hits[spot]=true;
+    }
 }
