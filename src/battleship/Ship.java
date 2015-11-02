@@ -6,17 +6,33 @@ package battleship;
 
 
 
-public class Ship {
-    enum Type{
+public class Ship{
+    public enum Type{
     AirCraftCarrier,BattleCarrier,StandardShip,Floater,Pontoon,Miss
     }
     private Type type;
     private boolean hits[];
     private int size;
-    Ship(int _size, Type _type)
+    private int spot;
+    Ship(int _spot, Type _type)
     { 
         type = _type;
-        size = _size;
+        if(_type == Type.Miss)
+            spot = 0;
+        else
+            spot = _spot;
+        if(type == Type.AirCraftCarrier)
+            size = 5;
+        else if(type == Type.BattleCarrier)
+            size = 4;
+        else if(type == Type.Floater)
+            size = 3;
+        else if(type == Type.StandardShip)
+            size = 3;
+        else if(type == Type.Pontoon)
+            size = 2;
+        else if(type == Type.Miss)
+            size = 1;
         hits = new boolean[size];
     }
     public void draw(int ytop, int xleft, int hieght,int width){
@@ -29,7 +45,16 @@ public class Ship {
     {
         return(type);
     }
-    public boolean getHits(){
-        return hits[size];
+    public int getHits(){
+        int numHits=0;
+        for(int index=0;index<hits.length;index++)
+        {
+            if(hits[index] == true)
+                numHits++;
+        }
+        return numHits;
+    }
+    public boolean getHit(){
+        return hits[spot];
     }
 }
