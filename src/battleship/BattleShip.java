@@ -178,21 +178,25 @@ public class BattleShip extends JFrame implements Runnable {
 //            g.drawLine(getX(borderlength) ,getY(250)+zi*(getHeight2()-250)/numRows ,
 //            getX(borderlength+(getWidth2()-borderlength*3)/2) ,getY(250)+zi*(getHeight2()-250)/numRows );
 //        }
-        for (int r=1;r<numRows;r++)
+       for (int z=0;z<numColumns;z++)
+   {      
+        for (int zi=0;zi<numRows+2;zi++)
         {
-            g.drawLine(getX(sideborderlength) ,
-                    getY(250)+r*(getHeight2()-250)/numRows ,
-                    getX(sideborderlength+(getWidth2()-sideborderlength*3)/2),
-                    getY(250)+r*(getHeight2()-250)/numRows );
+            g.drawLine(getX(borderlength) ,
+             getY(220)+zi*(getHeight2()-250)/numRows ,
+             getX(borderlength+(getWidth2()-borderlength*3)/2),
+             getY(220)+zi*(getHeight2()-250)/numRows );
+            
+            g.drawLine(getX(borderlength) ,
+             getY(220)+zi*(getHeight2()-250)/numRows ,
+             getX(borderlength+(getWidth2()-borderlength*3)/1),
+             getY(220)+zi*(getHeight2()-250)/numRows );
+          
+            g.drawLine(getX(0)+z*getWidth2()/numColumns ,getY(0) ,
+            getX(0)+z*getWidth2()/numColumns,getY(getHeight2())  );
+       
         }
-        for (int c=1;c<numColumns;c++)
-        {
-            g.drawLine(getX(sideborderlength) ,
-                    getY(250)+c*(getWidth2()-250)/numColumns ,
-                    getX(sideborderlength+(getHeight2()-sideborderlength*3)/2),
-                    getY(250)+c*(getWidth2()-250)/numColumns );
-        }
-        
+   }   
         
 //        for(int c=1;c<numColumns;c++)
 //        {
