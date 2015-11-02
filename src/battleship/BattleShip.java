@@ -192,6 +192,8 @@ public class BattleShip extends JFrame implements Runnable {
                     getX(sideborderlength+(getHeight2()-sideborderlength*3)/2),
                     getY(250)+c*(getWidth2()-250)/numColumns );
         }
+        
+        
 //        for(int c=1;c<numColumns;c++)
 //        {
 //            g.drawLine(getX(0)
