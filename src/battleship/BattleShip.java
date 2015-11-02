@@ -25,6 +25,7 @@ public class BattleShip extends JFrame implements Runnable {
     
     final int numRows = 10;
     final int numColumns = 10;
+    final int borderlength = 100;
     final int sideborderlength = 100;
     final int topborderlength = 100;
     
