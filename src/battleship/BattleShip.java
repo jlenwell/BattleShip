@@ -178,19 +178,31 @@ public class BattleShip extends JFrame implements Runnable {
 //            g.drawLine(getX(borderlength) ,getY(250)+zi*(getHeight2()-250)/numRows ,
 //            getX(borderlength+(getWidth2()-borderlength*3)/2) ,getY(250)+zi*(getHeight2()-250)/numRows );
 //        }
-        for (int r=1;r<numRows;r++)
+//        for (int r=1;r<numRows;r++)
+//        {
+//            g.drawLine(getX(sideborderlength) ,
+//                    getY(250)+r*(getHeight2()-250)/numRows ,
+//                    getX(sideborderlength+(getWidth2()-sideborderlength*3)/2),
+//                    getY(250)+r*(getHeight2()-250)/numRows );
+//        }
+//        for (int c=1;c<numColumns;c++)
+//        {
+//            g.drawLine(getX(sideborderlength) ,
+//                    getY(250)+c*(getWidth2()-250)/numColumns ,
+//                    getX(sideborderlength+(getHeight2()-sideborderlength*3)/2),
+//                    getY(250)+c*(getWidth2()-250)/numColumns );
+//        }
+//horizontal lines
+        for (int zi=1;zi<numRows;zi++)
         {
-            g.drawLine(getX(sideborderlength) ,
-                    getY(250)+r*(getHeight2()-250)/numRows ,
-                    getX(sideborderlength+(getWidth2()-sideborderlength*3)/2),
-                    getY(250)+r*(getHeight2()-250)/numRows );
+            g.drawLine(getX(sideborderlength) ,getY(250)+zi*(getHeight2()-250)/numRows ,
+            getX(sideborderlength+ (getWidth2()-sideborderlength*3)/2) ,getY(250)+zi*(getHeight2()-250)/numRows );
         }
-        for (int c=1;c<numColumns;c++)
+//vertical lines
+        for (int zi=1;zi<numColumns;zi++)
         {
-            g.drawLine(getX(sideborderlength) ,
-                    getY(250)+c*(getWidth2()-250)/numColumns ,
-                    getX(sideborderlength+(getHeight2()-sideborderlength*3)/2),
-                    getY(250)+c*(getWidth2()-250)/numColumns );
+            g.drawLine(getX(0)+zi*getWidth2()/numColumns ,getY(0) ,
+            getX(0)+zi*getWidth2()/numColumns,getY(getHeight2())  );
         }
         
         
