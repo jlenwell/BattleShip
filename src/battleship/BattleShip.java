@@ -62,6 +62,7 @@ public class BattleShip extends JFrame implements Runnable {
             public void mousePressed(MouseEvent e) {
                 if (e.BUTTON1 == e.getButton()) {
                     
+                    
                 }
                 if (e.BUTTON3 == e.getButton()) {
                     //right button
@@ -229,11 +230,13 @@ public class BattleShip extends JFrame implements Runnable {
         board1=new Ship[numRows][numColumns];
         board2=new Ship[numRows][numColumns];
         for(int zrow=0;zrow<numRows;zrow++)
+        {
             for(int zcol=0;zcol<numColumns;zcol++)
             {
                 board1[zrow][zcol] = null;
                 board2[zrow][zcol] = null;
             }
+        }
         
         
         player1 = new Ship[numShips];
