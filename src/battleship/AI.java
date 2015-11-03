@@ -140,7 +140,7 @@ public class AI {
             }
             else if(targets.get(row) == null)
             {
-//                targets.get(row) = new Ship(0,Ship.Type.Miss);
+                targets.set(row,new Ship(0,Ship.Type.Miss));
             }
             else
             {
