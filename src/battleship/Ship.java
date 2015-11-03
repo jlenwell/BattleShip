@@ -12,11 +12,13 @@ public class Ship{
     }
     private Type type;
     private boolean hits[];
+    private boolean sunk;
     private int size;
     private int spot;
     Ship(int _spot, Type _type)
     { 
         type = _type;
+        sunk = false;
         if(_type == Type.Miss)
             spot = 0;
         else
@@ -59,5 +61,10 @@ public class Ship{
     }
     public void shoot(){
         hits[spot]=true;
+        if(getHits() == size)
+            sunk = true;
+    }
+    public boolean getSunk(){
+        return sunk;
     }
 }
