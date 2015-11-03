@@ -25,13 +25,14 @@ public class BattleShip extends JFrame implements Runnable {
     
     final int numRows = 10;
     final int numColumns = 10;
-    final int sideborderlength = 100;
-    final int topborderlength = 300;
+    int sideborderlength = 100;
+    int topborderlength = 300;
     
     boolean startMenu;
     
     Ship board1[][];
     Ship board2[][];
+    Color borderColor = Color.BLUE;
     
     int numShips;
     Ship player1[];
@@ -138,7 +139,7 @@ public class BattleShip extends JFrame implements Runnable {
         }
 
 //fill background
-        g.setColor(Color.BLUE);
+        g.setColor(borderColor);
 
         g.fillRect(0, 0, xsize, ysize);
 
@@ -169,20 +170,20 @@ public class BattleShip extends JFrame implements Runnable {
 //            g.drawLine(getX(0)+zi*getWidth2()/numColumns ,getY(0) ,
 //            getX(0)+zi*getWidth2()/numColumns,getY(getHeight2())  );
 //        }   
-//horizontal lines
+//horizontal lines board 1
         for (int zi=0;zi<numRows;zi++)
         {
             g.drawLine(getX(sideborderlength) ,getY(topborderlength)+zi*(getHeight2()-topborderlength)/numRows ,
             getX(sideborderlength+ (getWidth2()-sideborderlength*3)/2) ,getY(topborderlength)+zi*(getHeight2()-topborderlength)/numRows);
         }
-//vertical lines
+//vertical lines board 1
         for (int zi=0;zi<numColumns+1;zi++)
         {
             g.drawLine(getX(sideborderlength)+zi*((getWidth2()-sideborderlength*3)/2)/numColumns ,getY(topborderlength) ,
             getX(sideborderlength)+zi*((getWidth2()-sideborderlength*3)/2)/numColumns,getY(getHeight2()));
         }
-        g.setColor(Color.black);
-        g.fillRect(getWidth2()/2, getY(topborderlength), getWidth2()/50, getHeight2()-topborderlength);
+        g.setColor(borderColor);// center line
+        g.fillRect(getWidth2()/2, getY(topborderlength), getWidth2()/50, getHeight2()-topborderlength+2);
         
         
         g.fillRect(getX(0),getY(0), getWidth2(), topborderlength);
@@ -250,14 +251,7 @@ public class BattleShip extends JFrame implements Runnable {
             }
             reset();
         }
-        
-        for (int zrow = 0;zrow < numRows;zrow++)
-        {
-            for (int zcolumn = 0;zcolumn < numColumns;zcolumn++)
-            {
-                
-            }
-        }
+        topborderlength = getHeight2()*4/10;
     }
 
 ////////////////////////////////////////////////////////////////////////////
