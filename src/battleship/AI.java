@@ -72,11 +72,11 @@ public class AI {
         }
         return hit;
     }
-    private void fireMedium(Ship[][] board)
-    {
-        fireEasy(board);
-    }
     private void fireHard(Ship[][] board)
+    {
+        fireMedium(board);
+    }
+    private void fireMedium(Ship[][] board)
     {
         int row;
         int col;
