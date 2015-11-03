@@ -170,19 +170,19 @@ public class BattleShip extends JFrame implements Runnable {
 //            getX(0)+zi*getWidth2()/numColumns,getY(getHeight2())  );
 //        }   
 //horizontal lines
-        for (int zi=1;zi<numRows;zi++)
+        for (int zi=0;zi<numRows;zi++)
         {
-            g.drawLine(getX(sideborderlength) ,getY(250)+zi*(getHeight2()-250)/numRows ,
-            getX(sideborderlength+ (getWidth2()-sideborderlength*3)/2) ,getY(250)+zi*(getHeight2()-250)/numRows );
+            g.drawLine(getX(sideborderlength) ,getY(topborderlength)+zi*(getHeight2()-topborderlength)/numRows ,
+            getX(sideborderlength+ (getWidth2()-sideborderlength*3)/2) ,getY(topborderlength)+zi*(getHeight2()-topborderlength)/numRows);
         }
 //vertical lines
-        for (int zi=1;zi<numColumns;zi++)
+        for (int zi=0;zi<numColumns+1;zi++)
         {
-            g.drawLine(getX(250)+zi*getWidth2()/numColumns ,getY(topborderlength) ,
-            getX(topborderlength)+zi*getWidth2()/numColumns,getY(getHeight2()));
+            g.drawLine(getX(sideborderlength)+zi*((getWidth2()-sideborderlength*3)/2)/numColumns ,getY(topborderlength) ,
+            getX(sideborderlength)+zi*((getWidth2()-sideborderlength*3)/2)/numColumns,getY(getHeight2()));
         }
         g.setColor(Color.black);
-        g.fillRect(getWidth2()/2, getY(getHeight2()/3), getWidth2()/40, getHeight2()*3/4);
+        g.fillRect(getWidth2()/2, getY(topborderlength), getWidth2()/50, getHeight2()-topborderlength);
         
         
         
