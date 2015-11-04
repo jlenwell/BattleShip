@@ -186,7 +186,7 @@ public class BattleShip extends JFrame implements Runnable {
         g.setColor(borderColor);// center line
         g.fillRect(getWidth2()/2, getY(topborderlength), getWidth2()/50, getHeight2()-topborderlength+2);
         
-        
+        g.setColor(Color.BLACK);
         g.fillRect(getX(0),getY(0), getWidth2(), topborderlength);
         g.drawImage(battleShipImage,getX(0),getY(0),
                 500,topborderlength,this);
