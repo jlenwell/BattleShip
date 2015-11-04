@@ -202,6 +202,41 @@ public class BattleShip extends JFrame implements Runnable {
         
         gOld.drawImage(image, 0, 0, null);
     }
+    public void placeShip(Ship _ship,int startRow,int startCol,Ship[][] board)
+    {
+        if(_ship.getDirection() == Ship.Direction.Down
+            && startRow+_ship.getSize()<numRows)
+        {
+            for(int index = 0;index<_ship.getSize();index++)
+            {
+                board[startRow+index][startCol] = new Ship(index,_ship.getType(),_ship.getDirection());
+            }
+        }
+        else if(_ship.getDirection() == Ship.Direction.Up
+            && startRow-_ship.getSize()>0)
+        {
+            for(int index = 0;index<_ship.getSize();index++)
+            {
+                board[startRow-index][startCol] = new Ship(index,_ship.getType(),_ship.getDirection());
+            }
+        }
+        else if(_ship.getDirection() == Ship.Direction.Left
+            && startCol-_ship.getSize()>0)
+        {
+            for(int index = 0;index<_ship.getSize();index++)
+            {
+                board[startRow][startCol-index] = new Ship(index,_ship.getType(),_ship.getDirection());
+            }
+        }
+        else if(_ship.getDirection() == Ship.Direction.Right
+            && startCol+_ship.getSize()<numColumns)
+        {
+            for(int index = 0;index<_ship.getSize();index++)
+            {
+                board[startRow][startCol+index] = new Ship(index,_ship.getType(),_ship.getDirection());
+            }
+        }
+    }
     
 /////////////////////////////////////////////////////////////////////
 // needed for     implement runnable
@@ -234,10 +269,6 @@ public class BattleShip extends JFrame implements Runnable {
         
         player1 = new Ship[numShips];
         player2 = new Ship[numShips];
-        for(int index=0;index<numShips;index++){
-            player1[index]=new Ship(index+1,Ship.Type.BattleCarrier);
-            player1[index]=new Ship(index+1,Ship.Type.Floater);
-        }
         
     }
 /////////////////////////////////////////////////////////////////////////
