@@ -37,7 +37,7 @@ public class BattleShip extends JFrame implements Runnable {
     int numShips;
     Ship player1[];
     Ship player2[];
-    
+    Image battleShipImage;
     boolean turn;
    
     int mouseXPos;
@@ -187,6 +187,10 @@ public class BattleShip extends JFrame implements Runnable {
         
         
         g.fillRect(getX(0),getY(0), getWidth2(), topborderlength);
+        g.drawImage(battleShipImage,getX(0),getY(0),
+                500,topborderlength,this);
+       g.fillRect(getX(0),getY(topborderlength), sideborderlength, getHeight2() -topborderlength);
+        
 //        for(int c=1;c<numColumns;c++)
 //        {
 //            g.drawLine(getX(0)
@@ -198,11 +202,11 @@ public class BattleShip extends JFrame implements Runnable {
 //            g.drawLine(getX(0)+zi*getWidth2()/numColumns ,getY(0) ,
 //            getX(0)+zi*getWidth2()/numColumns,getY(getHeight2())  );
 //        }
-
+          
         
         gOld.drawImage(image, 0, 0, null);
     }
-    
+   
 /////////////////////////////////////////////////////////////////////
 // needed for     implement runnable
     public void run() {
@@ -249,6 +253,8 @@ public class BattleShip extends JFrame implements Runnable {
                 xsize = getSize().width;
                 ysize = getSize().height;
             }
+            
+            battleShipImage = Toolkit.getDefaultToolkit().getImage("./battleShip.png");
             reset();
         }
         topborderlength = getHeight2()*4/10;
