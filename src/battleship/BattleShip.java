@@ -27,6 +27,7 @@ public class BattleShip extends JFrame implements Runnable {
     final int numColumns = 10;
     int sideborderlength = 100;
     int topborderlength = 300;
+  
     
     boolean startMenu;
     
@@ -186,11 +187,24 @@ public class BattleShip extends JFrame implements Runnable {
         g.setColor(borderColor);// center line
         g.fillRect(getWidth2()/2, getY(topborderlength), getWidth2()/50, getHeight2()-topborderlength+2);
         
-        g.setColor(Color.BLACK);
+        g.setColor(Color.blue);
         g.fillRect(getX(0),getY(0), getWidth2(), topborderlength);
         g.drawImage(battleShipImage,getX(0),getY(0),
                 500,topborderlength,this);
-       g.fillRect(getX(0),getY(topborderlength), sideborderlength, getHeight2() -topborderlength);
+        g.fillRect(getX(0),getY(topborderlength), sideborderlength, getHeight2() -topborderlength);
+        
+        g.setColor(Color.black);
+        for (int r=0;r<numRows;r++)
+        {
+            g.drawLine(getX(getWidth2()-sideborderlength) ,getY(topborderlength)+r*(getHeight2()-topborderlength)/numRows ,
+            getX(sideborderlength+ (getWidth2()-sideborderlength*3)/2) ,getY(topborderlength)+r*(getHeight2()-topborderlength)/numRows);
+        }
+//vertical lines board 1
+        for (int c=0;c<numColumns+1;c++)
+        {
+            g.drawLine(getX(getWidth2()-sideborderlength)+c*((getWidth2()-sideborderlength*3)/2)/numColumns ,getY(topborderlength) ,
+            getX(getWidth2()-sideborderlength)+c*((getWidth2()-sideborderlength*3)/2)/numColumns,getY(getHeight2()));
+        }
         
 //        for(int c=1;c<numColumns;c++)
 //        {
