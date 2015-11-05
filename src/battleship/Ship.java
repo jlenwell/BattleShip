@@ -8,15 +8,20 @@ package battleship;
 
 public class Ship{
     public enum Type{
-    AirCraftCarrier,BattleCarrier,StandardShip,Floater,Pontoon,Miss
+        AirCraftCarrier,BattleCarrier,StandardShip,Floater,Pontoon,Miss
+    }
+    public enum Direction{
+        Up,Down,Right,Left
     }
     private Type type;
     private boolean hits[];
     private boolean sunk;
     private int size;
     private int spot;
-    Ship(int _spot, Type _type)
+    private Direction direction;
+    Ship(int _spot, Type _type,Direction _direction)
     { 
+        direction = _direction;
         type = _type;
         sunk = false;
         if(_type == Type.Miss)
@@ -40,8 +45,11 @@ public class Ship{
     public void draw(int ytop, int xleft, int hieght,int width){
         
     }
-    public int getsize(){
+    public int getSize(){
         return size;
+    }
+    public Direction getDirection(){
+        return direction;
     }
     public Type getType()
     {
