@@ -38,8 +38,9 @@ public class BattleShip extends JFrame implements Runnable {
     Ship player1[];
     Ship player2[];
     Image battleShipImage;
+    Image battleShipImage2;
     boolean turn;
-   
+    boolean screenPresent;
     int mouseXPos;
     int mouseYPos;
     
@@ -203,7 +204,17 @@ public class BattleShip extends JFrame implements Runnable {
 //            g.drawLine(getX(0)+zi*getWidth2()/numColumns ,getY(0) ,
 //            getX(0)+zi*getWidth2()/numColumns,getY(getHeight2())  );
 //        }
-          
+          if (screenPresent)
+          { 
+              
+               
+             g.drawImage(battleShipImage2,getX(0),getY(0),
+                getWidth2(),getHeight2(),this);
+              g.setColor(Color.black);
+              g.fillRect(getX(getWidth2()/2), getY(500), 25, 10);
+              g.drawString("Start",getX(getWidth2()/2) , getY(500));
+              
+          }
         
         gOld.drawImage(image, 0, 0, null);
     }
