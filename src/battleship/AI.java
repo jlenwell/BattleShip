@@ -14,12 +14,14 @@ public class AI {
     private boolean hunt;
     private int lastRow;
     private int lastColumn;
-    private ArrayList<Ship> targets;
+    private Ship[] targets;
+    private int numTargets;
     
     AI(Difficulty _hardness){
         difficulty = Difficulty.Easy;
         hunt = true;
-        targets = new ArrayList<Ship>();
+        targets = new Ship[30];
+        numTargets=0;
     }
     public void setDifficulty(Difficulty _difficulty)
     {
@@ -78,73 +80,54 @@ public class AI {
     }
     private void fireMedium(Ship[][] board)
     {
-        int row;
-        int col;
+        int rand;
         int bugChecker = 0;
         if(hunt)
         {
             if(fireEasy(board))
             {
-                if(!targets.contains(board[lastRow+1][lastColumn]))
-                {
-                    targets.add(board[lastRow+1][lastColumn]);
-                }
-                if(!targets.contains(board[lastRow-1][lastColumn]))
-                {
-                    targets.add(board[lastRow-1][lastColumn]);
-                }
-                if(!targets.contains(board[lastRow][lastColumn+1]))
-                {
-                    targets.add(board[lastRow][lastColumn+1]);
-                }
-                if(!targets.contains(board[lastRow][lastColumn-1]))
-                {
-                    targets.add(board[lastRow][lastColumn-1]);
-                }
+                
+                targets[numTargets++] = board[lastRow+1][lastColumn];
+                targets[numTargets++] = board[lastRow-1][lastColumn];
+                targets[numTargets++] = board[lastRow][lastColumn+1];
+                targets[numTargets++] = board[lastRow][lastColumn-1];
+                
             }
         }
         else
         {
             do
             {
-                row = (int)(Math.random()*targets.size());
+                rand = (int)(Math.random()*numTargets);
                 bugChecker++;
             }
-            while(!(targets.get(row) == null ||
-                    (targets.get(row) != null && !targets.get(row).getHit() && targets.get(row).getType() != Ship.Type.Miss) ) ||
+            while(!(targets[rand] == null ||
+                    (targets[rand] != null && !targets[rand].getHit() && targets[rand].getType() != Ship.Type.Miss) ) ||
                     bugChecker <= 100);
             
             if(bugChecker >= 100)
             {
                 hunt = true;
+                for(int i =0;i<targets.length;)
+                    targets[i] = null;
+                    
                 if(fireEasy(board))
                 {
-                    targets = new ArrayList<Ship>();
-                    if(!targets.contains(board[lastRow+1][lastColumn]))
-                    {
-                        targets.add(board[lastRow+1][lastColumn]);
-                    }
-                    if(!targets.contains(board[lastRow-1][lastColumn]))
-                    {
-                        targets.add(board[lastRow-1][lastColumn]);
-                    }
-                    if(!targets.contains(board[lastRow][lastColumn+1]))
-                    {
-                        targets.add(board[lastRow][lastColumn+1]);
-                    }
-                    if(!targets.contains(board[lastRow][lastColumn-1]))
-                    {
-                        targets.add(board[lastRow][lastColumn-1]);
-                    }
+                    
+                    targets[numTargets++] = board[lastRow+1][lastColumn];
+                    targets[numTargets++] = board[lastRow-1][lastColumn];
+                    targets[numTargets++] = board[lastRow][lastColumn+1];
+                    targets[numTargets++] = board[lastRow][lastColumn-1];
+                
                 }
             }
-            else if(targets.get(row) == null)
+            else if(targets[rand] == null)
             {
-                targets.set(row,new Ship(0,Ship.Type.Miss));
+                targets[rand] = new Ship(0,Ship.Type.Miss);
             }
             else
             {
-                targets.get(row).shoot();
+                targets[rand].shoot();
             }
         }
     }
