@@ -210,9 +210,11 @@ public class BattleShip extends JFrame implements Runnable {
                
              g.drawImage(battleShipImage2,getX(0),getY(0),
                 getWidth2(),getHeight2(),this);
+              Color newColor = new Color (87,206,187);
+              g.setColor(newColor);
+              g.fillRect(getX(getWidth2()/2), getY(700), 50, 50);
               g.setColor(Color.black);
-              g.fillRect(getX(getWidth2()/2), getY(500), 25, 10);
-              g.drawString("Start",getX(getWidth2()/2) , getY(500));
+              g.drawString("Start",getX(getWidth2()/2) , getY(725));
               
           }
         
@@ -237,7 +239,7 @@ public class BattleShip extends JFrame implements Runnable {
     public void reset() {
         numShips=5;
         startMenu=true;
-        
+        screenPresent=true;
         board1=new Ship[numRows][numColumns];
         board2=new Ship[numRows][numColumns];
         for(int zrow=0;zrow<numRows;zrow++)
@@ -267,7 +269,8 @@ public class BattleShip extends JFrame implements Runnable {
                 xsize = getSize().width;
                 ysize = getSize().height;
             }
-            
+            battleShipImage2 = Toolkit.getDefaultToolkit().getImage("./battleship2.jpg");
+      
             battleShipImage = Toolkit.getDefaultToolkit().getImage("./battleShip.png");
             reset();
         }
