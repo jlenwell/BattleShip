@@ -193,30 +193,41 @@ public class BattleShip extends JFrame implements Runnable {
                 500,topborderlength,this);
         g.fillRect(getX(0),getY(topborderlength), sideborderlength, getHeight2() -topborderlength);
         
+//vertical and horizontal lines board 2        
         g.setColor(Color.black);
         for (int r=0;r<numRows;r++)
         {
             g.drawLine(getX(getWidth2()/2+sideborderlength) ,getY(topborderlength)+r*(getHeight2()-topborderlength)/numRows ,
             getX(getWidth2()/2+sideborderlength)+((getWidth2()-sideborderlength*3)/2) ,getY(topborderlength)+r*(getHeight2()-topborderlength)/numRows);
         }
-//vertical lines board 2
-        for (int c=-1;c<numColumns;c++)
+        for (int c=0;c<numColumns+1;c++)
         {
             g.drawLine(getX(getWidth2()/2+sideborderlength)+c*((getWidth2()-sideborderlength*3)/2)/numColumns ,getY(topborderlength) ,
             getX(getWidth2()/2+sideborderlength)+c*((getWidth2()-sideborderlength*3)/2)/numColumns ,getY(getHeight2()));
         }
-        
-//        for(int c=1;c<numColumns;c++)
-//        {
-//            g.drawLine(getX(0)
-//                    +c*getWidth2()/numColumns ,getY(0) ,
-//            getX(0)+c*getWidth2()/numColumns,getY(getHeight2()));  
-//        }
-//        for (int zi=1;zi<numColumns;zi++)
-//        {
-//            g.drawLine(getX(0)+zi*getWidth2()/numColumns ,getY(0) ,
-//            getX(0)+zi*getWidth2()/numColumns,getY(getHeight2())  );
-//        }
+         for (int zrow=0;zrow<numRows;zrow++)
+        {
+            for (int zcolumn=0;zcolumn<numColumns;zcolumn++)
+            {
+                if (board1[zrow][zcolumn] != null)
+                {
+                    
+                    g.setColor(Color.BLUE);
+                    g.fillOval(getX(0)+zcolumn*getWidth2()/numColumns,
+                    getY(0)+zrow*getHeight2()/numRows,
+                    getWidth2()/numColumns,
+                    getHeight2()/numRows);
+                    
+//                    if(board[zrow][zcolumn].getColor() != Color.pink)
+//                    {
+//                        g.setColor(Color.blue);
+//                        g.setFont(new Font("Impact",Font.BOLD,40) );
+//                        g.drawString("" + board[zrow][zcolumn].getValue(),getX(0) + zcolumn*getWidth2()/numColumns+18, zrow*getHeight2()/numRows+98);   
+//                    }
+                }
+            }
+        }
+
           
         
         gOld.drawImage(image, 0, 0, null);
