@@ -27,7 +27,7 @@ public class BattleShip extends JFrame implements Runnable {
     final int numColumns = 10; 
     final int sideborderlength = 100;
     final int topborderlength = 250;
-    
+    final int sideborderlength2 = 50;
     boolean startMenu;
     
     Ship board1[][];
@@ -64,9 +64,9 @@ public class BattleShip extends JFrame implements Runnable {
                     int ypos = e.getY() - getY(0);
                     if (xpos < 0 || ypos < 0 || xpos > getWidth2() || ypos > getHeight2())
                         return;
-                    
-                    int ydelta = getHeight2()/numRows;
-                    int xdelta = getWidth2()/numColumns;
+                    //board1
+                    int ydelta = (sideborderlength+(getHeight2()-sideborderlength*3)/2)/numRows;
+                    int xdelta = (sideborderlength+(getWidth2()-sideborderlength*3)/2)/numColumns;
                     currentMouseColumn = xpos/xdelta;
 //                    int row = ypos/ydelta;
                     currentMouseRow = numRows - 1;
@@ -184,7 +184,7 @@ public class BattleShip extends JFrame implements Runnable {
         
         
         
-//drawing horizontal lines
+//drawing horizontal vertical lines board1
         for (int zi=0;zi<numRows+1;zi++)
         {
             g.drawLine(getX(sideborderlength) ,getY(topborderlength)+zi*(getHeight2()-250)/numRows ,
@@ -195,10 +195,26 @@ public class BattleShip extends JFrame implements Runnable {
             g.drawLine(getX(sideborderlength)+zi*((getWidth2()-sideborderlength*3)/2)/numColumns ,getY(topborderlength) ,
             getX(sideborderlength)+zi*((getWidth2()-sideborderlength*3)/2)/numColumns, getY(getHeight2())  );
         }
+        int offset1 = -21;
+        int offset2 = 29;
         g.setColor(Color.blue);
-        g.fillRect(getWidth2()/2, getHeight2()/3, getWidth2()/50, getHeight2()*2/3);
+        g.fillRect(getWidth2()/2+offset1, getY(topborderlength), getWidth2()/20+offset2, getHeight2());
         
-//draw ships        
+        //drawing horizontal lines an
+        for (int r=0;r<numRows+1;r++)
+        {
+            g.drawLine(getX(getWidth2()/2+sideborderlength2) ,getY(topborderlength)+r*(getHeight2()-250)/numRows ,
+            getX((getWidth2()/2+sideborderlength2)+(getWidth2()-sideborderlength*3)/2) ,getY(topborderlength)+r*(getHeight2()-topborderlength)/numRows );
+        }
+        for (int c=0;c<numColumns+1;c++)
+        {
+            g.drawLine(getX(getWidth2()/2+sideborderlength2)+c*((getWidth2()-sideborderlength*3)/2)/numColumns ,getY(topborderlength) ,
+            getX(getWidth2()/2+sideborderlength2)+c*((getWidth2()-sideborderlength*3)/2)/numColumns, getY(getHeight2())  );
+        }
+  
+        
+//draw ships 
+        g.setColor(Color.orange);
         for (int zrow=0;zrow<numRows;zrow++)
         {
             for (int zcolumn=0;zcolumn<numColumns;zcolumn++)
