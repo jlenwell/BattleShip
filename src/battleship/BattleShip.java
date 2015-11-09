@@ -219,6 +219,8 @@ public class BattleShip extends JFrame implements Runnable {
             for(int index = 0;index<_ship.getSize();index++)
             {
                 board[startRow+index][startCol] = new Ship(index,_ship.getType(),_ship.getDirection());
+                board[startRow+index][startCol].setXPos(startCol);
+                board[startRow+index][startCol].setYPos(startRow+index);
             }
         }
         else if(_ship.getDirection() == Ship.Direction.Up
@@ -227,6 +229,8 @@ public class BattleShip extends JFrame implements Runnable {
             for(int index = 0;index<_ship.getSize();index++)
             {
                 board[startRow-index][startCol] = new Ship(index,_ship.getType(),_ship.getDirection());
+                board[startRow-index][startCol].setXPos(startCol);
+                board[startRow-index][startCol].setYPos(startRow+index);
             }
         }
         else if(_ship.getDirection() == Ship.Direction.Left
@@ -235,6 +239,8 @@ public class BattleShip extends JFrame implements Runnable {
             for(int index = 0;index<_ship.getSize();index++)
             {
                 board[startRow][startCol-index] = new Ship(index,_ship.getType(),_ship.getDirection());
+                board[startRow][startCol-index].setXPos(startCol-index);
+                board[startRow][startCol-index].setYPos(startRow);
             }
         }
         else if(_ship.getDirection() == Ship.Direction.Right
@@ -243,6 +249,8 @@ public class BattleShip extends JFrame implements Runnable {
             for(int index = 0;index<_ship.getSize();index++)
             {
                 board[startRow][startCol+index] = new Ship(index,_ship.getType(),_ship.getDirection());
+                board[startRow][startCol+index].setXPos(startCol+index);
+                board[startRow][startCol+index].setYPos(startRow);
             }
         }
     }
@@ -265,7 +273,7 @@ public class BattleShip extends JFrame implements Runnable {
     public void reset() {
         numShips=5;
         startMenu=true;
-        ai = new AI(AI.Difficulty.Easy);
+        ai = new AI(AI.Difficulty.Medium);
         
         board1=new Ship[numRows][numColumns];
         board2=new Ship[numRows][numColumns];
@@ -276,7 +284,7 @@ public class BattleShip extends JFrame implements Runnable {
                 board2[zrow][zcol] = null;
             }
         
-        placeShip(new Ship(0,Ship.Type.BattleCarrier,Ship.Direction.Down),2,2,board1);
+        placeShip(new Ship(0,Ship.Type.BattleCarrier,Ship.Direction.Left),6,6,board1);
         
         
     }

@@ -19,6 +19,8 @@ public class Ship{
     private int size;
     private int spot;
     private Direction direction;
+    private int xpos;
+    private int ypos;
     Ship(int _spot, Type _type,Direction _direction)
     { 
         direction = _direction;
@@ -66,6 +68,18 @@ public class Ship{
     }
     public void draw(int ytop, int xleft, int hieght,int width){
         
+    }
+    public void setXPos(int _xpos){
+        xpos = _xpos;
+    }
+    public int getXPos(){
+        return xpos;
+    }
+    public void setYPos(int _ypos){
+        ypos = _ypos;
+    }
+    public int getYPos(){
+        return ypos;
     }
     public int getSize(){
         return size;
