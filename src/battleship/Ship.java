@@ -69,18 +69,6 @@ public class Ship{
     public void draw(int ytop, int xleft, int hieght,int width){
         
     }
-    public void setXPos(int _xpos){
-        xpos = _xpos;
-    }
-    public int getXPos(){
-        return xpos;
-    }
-    public void setYPos(int _ypos){
-        ypos = _ypos;
-    }
-    public int getYPos(){
-        return ypos;
-    }
     public int getSize(){
         return size;
     }
@@ -101,7 +89,10 @@ public class Ship{
         return numHits;
     }
     public boolean getHit(){
-        return hits[spot];
+        if(type == Type.Miss)
+            return true;
+        else
+            return hits[spot];
     }
     public void shoot(){
         hits[spot]=true;

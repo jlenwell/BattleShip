@@ -157,18 +157,18 @@ public class BattleShip extends JFrame implements Runnable {
         }
           
         g.setColor(Color.BLACK);
-//horizontal lines
-//        for (int zi=1;zi<numRows;zi++)
-//        {
-//            g.drawLine(getX(0) ,getY(0)+zi*getHeight2()/numRows ,
-//            getX(getWidth2()) ,getY(0)+zi*getHeight2()/numRows );
-//        }
-////vertical lines
-//        for (int zi=1;zi<numColumns;zi++)
-//        {
-//            g.drawLine(getX(0)+zi*getWidth2()/numColumns ,getY(0) ,
-//            getX(0)+zi*getWidth2()/numColumns,getY(getHeight2())  );
-//        }
+////////////////horizontal lines
+        for (int zi=1;zi<numRows;zi++)
+        {
+            g.drawLine(getX(0) ,getY(0)+zi*getHeight2()/numRows,
+            getX(getWidth2()) ,getY(0)+zi*getHeight2()/numRows);
+        }
+//////////////vertical lines
+        for (int zi=1;zi<numColumns;zi++)
+        {
+            g.drawLine(getX(0)+zi*getWidth2()/numColumns ,getY(0) ,
+            getX(0)+zi*getWidth2()/numColumns,getY(getHeight2())  );
+        }
         
         
         
@@ -219,8 +219,6 @@ public class BattleShip extends JFrame implements Runnable {
             for(int index = 0;index<_ship.getSize();index++)
             {
                 board[startRow+index][startCol] = new Ship(index,_ship.getType(),_ship.getDirection());
-                board[startRow+index][startCol].setXPos(startCol);
-                board[startRow+index][startCol].setYPos(startRow+index);
             }
         }
         else if(_ship.getDirection() == Ship.Direction.Up
@@ -229,8 +227,6 @@ public class BattleShip extends JFrame implements Runnable {
             for(int index = 0;index<_ship.getSize();index++)
             {
                 board[startRow-index][startCol] = new Ship(index,_ship.getType(),_ship.getDirection());
-                board[startRow-index][startCol].setXPos(startCol);
-                board[startRow-index][startCol].setYPos(startRow+index);
             }
         }
         else if(_ship.getDirection() == Ship.Direction.Left
@@ -239,8 +235,6 @@ public class BattleShip extends JFrame implements Runnable {
             for(int index = 0;index<_ship.getSize();index++)
             {
                 board[startRow][startCol-index] = new Ship(index,_ship.getType(),_ship.getDirection());
-                board[startRow][startCol-index].setXPos(startCol-index);
-                board[startRow][startCol-index].setYPos(startRow);
             }
         }
         else if(_ship.getDirection() == Ship.Direction.Right
@@ -249,8 +243,6 @@ public class BattleShip extends JFrame implements Runnable {
             for(int index = 0;index<_ship.getSize();index++)
             {
                 board[startRow][startCol+index] = new Ship(index,_ship.getType(),_ship.getDirection());
-                board[startRow][startCol+index].setXPos(startCol+index);
-                board[startRow][startCol+index].setYPos(startRow);
             }
         }
     }
