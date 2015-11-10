@@ -60,13 +60,14 @@ public class BattleShip extends JFrame implements Runnable {
         addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
                 if (e.BUTTON1 == e.getButton()) {
+                    //board1
                     int xpos = e.getX() - getX(0);
                     int ypos = e.getY() - getY(0);
-                    if (xpos < 0 || ypos < 0 || xpos > getWidth2() || ypos > getHeight2())
+                    if (xpos < sideborderlength || ypos > topborderlength || xpos > getWidth2() || ypos > getHeight2())
                         return;
-                    //board1
-                    int ydelta = (sideborderlength+(getHeight2()-sideborderlength*3)/2)/numRows;
-                    int xdelta = (sideborderlength+(getWidth2()-sideborderlength*3)/2)/numColumns;
+                  
+                    int ydelta = (getHeight2()-topborderlength)/numRows;
+                    int xdelta = (getWidth2()/2-sideborderlength)/numColumns;
                     currentMouseColumn = xpos/xdelta;
 //                    int row = ypos/ydelta;
                     currentMouseRow = numRows - 1;
@@ -76,6 +77,7 @@ public class BattleShip extends JFrame implements Runnable {
                 }
                 if (e.BUTTON3 == e.getButton()) {
                     //right button
+                    reset();
                 }
                 repaint();
             }
@@ -200,10 +202,10 @@ public class BattleShip extends JFrame implements Runnable {
         g.setColor(Color.blue);
         g.fillRect(getWidth2()/2+offset1, getY(topborderlength), getWidth2()/20+offset2, getHeight2());
         
-        //drawing horizontal lines an
+        //drawing horizontal and vertical lines board2
         for (int r=0;r<numRows+1;r++)
         {
-            g.drawLine(getX(getWidth2()/2+sideborderlength2) ,getY(topborderlength)+r*(getHeight2()-250)/numRows ,
+            g.drawLine(getX(getWidth2()/2+sideborderlength2) ,getY(topborderlength)+r*(getHeight2()-topborderlength)/numRows ,
             getX((getWidth2()/2+sideborderlength2)+(getWidth2()-sideborderlength*3)/2) ,getY(topborderlength)+r*(getHeight2()-topborderlength)/numRows );
         }
         for (int c=0;c<numColumns+1;c++)
@@ -214,21 +216,22 @@ public class BattleShip extends JFrame implements Runnable {
   
         
 //draw ships 
+        int offset = 26;
         g.setColor(Color.orange);
-        for (int zrow=0;zrow<numRows;zrow++)
+        for(int zrow=0;zrow<numRows;zrow++)
         {
-            for (int zcolumn=0;zcolumn<numColumns;zcolumn++)
+            for(int zcolumn=0;zcolumn<numColumns;zcolumn++)
             {
                 if (board1[zrow][zcolumn] != null)
-                {                  
-                    //g.setColor(board1[zrow][zcolumn].getColor());
-                    g.fillOval(getX(0)+zcolumn*getWidth2()/numColumns,
-                    getY(0)+zrow*getHeight2()/numRows,
-                    getWidth2()/numColumns,
-                    getHeight2()/numRows);
+                {                   
+                    g.fillRect(getX(sideborderlength)+zcolumn*getWidth2()/numColumns,
+                    getY(topborderlength-25)+zrow*getHeight2()/numRows,
+                    ((getWidth2()-sideborderlength*3)/2)/numColumns,
+                    ((getHeight2()*2/3))/numRows);
                 }              
             }
         }
+        
 
         
         gOld.drawImage(image, 0, 0, null);
@@ -263,6 +266,9 @@ public class BattleShip extends JFrame implements Runnable {
                 board2[zrow][zcol] = null;
             }
         }
+        board1[1][0] = new Ship(1);
+        board1[2][0] = new Ship(1);
+        
         
         player1 = new Ship[numShips];
         player2 = new Ship[numShips];
