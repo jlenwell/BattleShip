@@ -4,6 +4,7 @@
  */
 package battleship;
 
+import battleship.AI.*;
 import java.io.*;
 import java.awt.*;
 import java.awt.geom.*;
@@ -98,7 +99,7 @@ public class BattleShip extends JFrame implements Runnable {
                 }
                 if (e.VK_V == e.getKeyCode())
                 {
-                
+                    reset();
                 }
                 if (e.VK_N == e.getKeyCode())
                 {
@@ -277,6 +278,10 @@ public class BattleShip extends JFrame implements Runnable {
             }
         
         placeShip(new Ship(0,Ship.Type.BattleCarrier,Ship.Direction.Left),6,6,board1);
+        placeShip(new Ship(0,Ship.Type.Floater,Ship.Direction.Down),1,1,board1);
+        placeShip(new Ship(0,Ship.Type.Floater,Ship.Direction.Down),3,6,board1);
+        placeShip(new Ship(0,Ship.Type.Pontoon,Ship.Direction.Left),2,6,board1);
+        placeShip(new Ship(0,Ship.Type.Pontoon,Ship.Direction.Down),2,4,board1);
         
         
     }

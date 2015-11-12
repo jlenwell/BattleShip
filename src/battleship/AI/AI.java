@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package battleship;
-import java.util.ArrayList;
+package battleship.AI;
+
+import battleship.*;
 
 public class AI {
     public enum Difficulty{
@@ -20,7 +21,7 @@ public class AI {
     private int[][] targetPositions;
     private boolean[] activeTargets;
     
-    AI(Difficulty _hardness){
+    public AI(Difficulty _hardness){
         numPossibleTargets = 200;
         difficulty = _hardness;
         hunt = true;
@@ -91,19 +92,31 @@ public class AI {
         {
             if(fireEasy(board))
             {
-                activeTargets[numTargets] = true;
+                if(board[lastRow+1][lastColumn] != null)
+                    activeTargets[numTargets] = !board[lastRow+1][lastColumn].getHit();
+                else
+                    activeTargets[numTargets] = true;
                 targetPositions[numTargets][0] = lastRow+1;
                 targetPositions[numTargets][1] = lastColumn;
                 targets[numTargets++] = board[lastRow+1][lastColumn];
-                activeTargets[numTargets] = true;
+                if(board[lastRow-1][lastColumn] != null)
+                    activeTargets[numTargets] = !board[lastRow-1][lastColumn].getHit();
+                else
+                    activeTargets[numTargets] = true;
                 targetPositions[numTargets][0] = lastRow-1;
                 targetPositions[numTargets][1] = lastColumn;
                 targets[numTargets++] = board[lastRow-1][lastColumn];
-                activeTargets[numTargets] = true;
+                if(board[lastRow][lastColumn+1] != null)
+                    activeTargets[numTargets] = !board[lastRow][lastColumn+1].getHit();
+                else
+                    activeTargets[numTargets] = true;
                 targetPositions[numTargets][0] = lastRow;
                 targetPositions[numTargets][1] = lastColumn+1;
                 targets[numTargets++] = board[lastRow][lastColumn+1];
-                activeTargets[numTargets] = true;
+                if(board[lastRow][lastColumn-1] != null)
+                    activeTargets[numTargets] = !board[lastRow][lastColumn-1].getHit();
+                else 
+                    activeTargets[numTargets] = true;
                 targetPositions[numTargets][0] = lastRow;
                 targetPositions[numTargets][1] = lastColumn-1;
                 targets[numTargets++] = board[lastRow][lastColumn-1];
@@ -111,14 +124,6 @@ public class AI {
         }
         else
         {
-            do
-            {
-                rand = (int)(Math.random()*numTargets);
-                bugChecker++;
-            }
-            while(!(targets[rand] == null || 
-                  (targets[rand] != null && targets[rand].getType() != Ship.Type.Miss && targets[rand].getType() != Ship.Type.Miss ))
-                    && activeTargets[rand]);
             boolean anytargets = false;
             for(int index=0;index<activeTargets.length;index++)
             {
@@ -126,10 +131,19 @@ public class AI {
                     anytargets = true;
             }
             
+            do
+            {
+                rand = (int)(Math.random()*numTargets);
+                bugChecker++;
+            }
+            while((!(targets[rand] == null || 
+                  (targets[rand] != null && targets[rand].getType() != Ship.Type.Miss && targets[rand].getType() != Ship.Type.Miss ))
+                    || !activeTargets[rand] || (targets[rand] != null && targets[rand].getHit()))
+                    && bugChecker<=100);
             if(bugChecker >= 100 || !anytargets)
             {
                 hunt = true;
-                for(int i =0;i<targets.length;)
+                for(int i =0;i<targets.length;i++)
                     targets[i] = null;
                 for(int i =0;i<targetPositions.length;i++)
                     for(int b =0;b<targetPositions[i].length;b++)
@@ -151,23 +165,34 @@ public class AI {
                 lastRow = targetPositions[rand][0];
                 lastColumn = targetPositions[rand][1];
                 targets[rand].shoot();
+                if(board[lastRow+1][lastColumn] != null)
+                    activeTargets[numTargets] = !board[lastRow+1][lastColumn].getHit();
+                else
+                    activeTargets[numTargets] = true;
                 targetPositions[numTargets][0] = lastRow+1;
                 targetPositions[numTargets][1] = lastColumn;
                 targets[numTargets++] = board[lastRow+1][lastColumn];
-                
+                if(board[lastRow-1][lastColumn] != null)
+                    activeTargets[numTargets] = !board[lastRow-1][lastColumn].getHit();
+                else
+                    activeTargets[numTargets] = true;
                 targetPositions[numTargets][0] = lastRow-1;
                 targetPositions[numTargets][1] = lastColumn;
                 targets[numTargets++] = board[lastRow-1][lastColumn];
-                
+                if(board[lastRow][lastColumn+1] != null)
+                    activeTargets[numTargets] = !board[lastRow][lastColumn+1].getHit();
+                else
+                    activeTargets[numTargets] = true;
                 targetPositions[numTargets][0] = lastRow;
                 targetPositions[numTargets][1] = lastColumn+1;
                 targets[numTargets++] = board[lastRow][lastColumn+1];
-                
+                if(board[lastRow][lastColumn-1] != null)
+                    activeTargets[numTargets] = !board[lastRow][lastColumn-1].getHit();
+                else 
+                    activeTargets[numTargets] = true;
                 targetPositions[numTargets][0] = lastRow;
                 targetPositions[numTargets][1] = lastColumn-1;
                 targets[numTargets++] = board[lastRow][lastColumn-1];
-                
-                
                 
             }
         }

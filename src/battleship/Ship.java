@@ -21,7 +21,7 @@ public class Ship{
     private Direction direction;
     private int xpos;
     private int ypos;
-    Ship(int _spot, Type _type,Direction _direction)
+    public Ship(int _spot, Type _type,Direction _direction)
     { 
         direction = _direction;
         type = _type;
@@ -44,7 +44,7 @@ public class Ship{
             size = 1;
         hits = new boolean[size];
     }
-    Ship(int _spot, Type _type)
+    public Ship(int _spot, Type _type)
     { 
         type = _type;
         sunk = false;
@@ -99,6 +99,12 @@ public class Ship{
         if(getHits() == size)
             sunk = true;
     }
+    public void shootBomb(){
+        hits[spot]=true;
+        if(getHits() == size)
+            sunk = true;
+    }
+    
     public boolean getSunk(){
         return sunk;
     }
