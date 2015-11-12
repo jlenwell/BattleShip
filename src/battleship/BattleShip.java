@@ -29,6 +29,7 @@ public class BattleShip extends JFrame implements Runnable {
     int topborderlength = 300;
     
     boolean startMenu;
+    boolean pressStart;
     
     Ship board1[][];
     Ship board2[][];
@@ -62,7 +63,14 @@ public class BattleShip extends JFrame implements Runnable {
         addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
                 if (e.BUTTON1 == e.getButton()) {
-                    
+                  if(screenPresent)
+                  {
+                      if(e.getX() >(getX(getWidth2()/2))-500 && e.getX()<  ((getX(getWidth2()/2))-500)+100 && e.getY() > 
+                              (getHeight2()/2)+300 && e.getY() < ((getHeight2()/2)+300)+50)
+                      {
+                          screenPresent= false;
+                      }
+                  }
                     
                 }
                 if (e.BUTTON3 == e.getButton()) {
@@ -212,9 +220,13 @@ public class BattleShip extends JFrame implements Runnable {
                 getWidth2(),getHeight2(),this);
               Color newColor = new Color (87,206,187);
               g.setColor(newColor);
-              g.fillRect(getX(getWidth2()/2), getY(700), 50, 50);
+              g.fillRect((getX(getWidth2()/2))-500, (getHeight2()/2)+300, 100, 50);
+              g.fillRect((getX(getWidth2()/2))+200, (getHeight2()/2)+300, 100, 50);
+            
               g.setColor(Color.black);
-              g.drawString("Start",getX(getWidth2()/2) , getY(725));
+              g.setFont(new Font("Comic Sans MS",Font.PLAIN,30));
+              g.drawString("Start",(getX(getWidth2()/2))-500 ,(getHeight2()/2)+330);
+              g.drawString("Help",(getX(getWidth2()/2))+200 ,(getHeight2()/2)+330);
               
           }
         
