@@ -4,6 +4,9 @@
  */
 package battleship;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
+
 /**
  *
  * @author 373000836
@@ -16,5 +19,10 @@ public class Ship {
     }
     public int getsize(){
         return size;
+    }
+    public static void drawShip(Graphics2D g,int xleft,int xtop,int yleft,int ytop)
+    {
+        g.setColor(Color.yellow);
+        g.fillRect(xleft, xtop , yleft , ytop);
     }
 }
