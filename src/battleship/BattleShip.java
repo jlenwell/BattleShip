@@ -42,9 +42,6 @@ public class BattleShip extends JFrame implements Runnable {
     int mouseXPos;
     int mouseYPos;
     
-    int currentMouseColumn;
-    int currentMouseRow;
-    
     int winconnect;
     
     static BattleShip frame1;
@@ -68,17 +65,24 @@ public class BattleShip extends JFrame implements Runnable {
                   
                     int ydelta = (getHeight2()-topborderlength)/numRows;
                     int xdelta = (getWidth2()/2)/numColumns;
-                    currentMouseColumn = xpos/xdelta;
+                    int col = xpos/xdelta;
                     int row = ypos/ydelta;
-                    currentMouseRow = numRows - 1;
                     if(ypos <=topborderlength )
                     {
-                        if()
+                        if(xpos <= getWidth2()/2)
                         {    
-                            board1[currentMouseRow][currentMouseColumn] = new Ship(5);
+                            col = xpos/xdelta;
+                            row = ypos/ydelta;
+                            board1[row][col] = new Ship(5);
+                        }
+                        else
+                        {
+                            col = xpos/xdelta;
+                            row = ypos/ydelta;
+                            board2[row][col] = new Ship(5);
                         }
                     }
-                    board1[currentMouseRow][currentMouseColumn] = new Ship(5);
+                    board1[row][col] = new Ship(5);
                     
                 }
                 if (e.BUTTON3 == e.getButton()) {
