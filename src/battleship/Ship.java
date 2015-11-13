@@ -15,13 +15,39 @@ public class Ship{
     }
     private Type type;
     private boolean hits[];
+    private boolean sunk;
     private int size;
     private int spot;
     private Direction direction;
-    Ship(int _spot, Type _type,Direction _direction)
+    private int xpos;
+    private int ypos;
+    public Ship(int _spot, Type _type,Direction _direction)
     { 
         direction = _direction;
         type = _type;
+        sunk = false;
+        if(_type == Type.Miss)
+            spot = 0;
+        else
+            spot = _spot;
+        if(type == Type.AirCraftCarrier)
+            size = 5;
+        else if(type == Type.BattleCarrier)
+            size = 4;
+        else if(type == Type.Floater)
+            size = 3;
+        else if(type == Type.StandardShip)
+            size = 3;
+        else if(type == Type.Pontoon)
+            size = 2;
+        else if(type == Type.Miss)
+            size = 1;
+        hits = new boolean[size];
+    }
+    public Ship(int _spot, Type _type)
+    { 
+        type = _type;
+        sunk = false;
         if(_type == Type.Miss)
             spot = 0;
         else
@@ -63,6 +89,23 @@ public class Ship{
         return numHits;
     }
     public boolean getHit(){
-        return hits[spot];
+        if(type == Type.Miss)
+            return true;
+        else
+            return hits[spot];
+    }
+    public void shoot(){
+        hits[spot]=true;
+        if(getHits() == size)
+            sunk = true;
+    }
+    public void shootBomb(){
+        hits[spot]=true;
+        if(getHits() == size)
+            sunk = true;
+    }
+    
+    public boolean getSunk(){
+        return sunk;
     }
 }
