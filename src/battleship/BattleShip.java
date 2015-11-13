@@ -29,6 +29,12 @@ public class BattleShip extends JFrame implements Runnable {
     final int topborderlength = 250;
     final int sideborderlength2 = 50;
     boolean startMenu;
+    boolean play;
+    
+    boolean placing;
+    int placingRow;
+    int placingCol;
+    int placeStatus;
     
     Ship board1[][];
     Ship board2[][];
@@ -70,19 +76,29 @@ public class BattleShip extends JFrame implements Runnable {
                     int row;
                     if(ypos >=topborderlength )
                     {
-                        if(xpos <= getWidth2()/2)
+                        if(xpos <= getWidth2()/2 && play)
                         {    
                             col = xpos/xdelta;
                             row = (ypos-topborderlength)/ydelta;
                             if(board1[row][col] != null)
+                            {
                                 board1[row][col].shoot();
-                            else 
+                            }
+                            else
+                            {
                                 board1[row][col] = new Ship(0,Ship.Type.Miss);
+                            }
+//                            ai.fire()
                         }
-                        else
+                        else if(xpos >= getWidth2()/2 && !play && placing)
                         {
-                            col = xpos/xdelta;
-                            row = ypos/ydelta;
+                            col = (xpos-getWidth2()/2)/xdelta;
+                            row = (ypos-topborderlength)/ydelta;
+                            board2[row][col] = new Ship(0,Ship.Type.AirCraftCarrier);
+                            placingRow = row;
+                            placingCol = col;
+                            
+                            placing = false;
                         }
                     }
                     
@@ -114,13 +130,252 @@ public class BattleShip extends JFrame implements Runnable {
         addKeyListener(new KeyAdapter() {
 
             public void keyPressed(KeyEvent e) {
+                if (e.VK_UP == e.getKeyCode() && !placing && !play)
+                {
+                    if(placeStatus == 0)
+                    {
+                        if(placeShip(new Ship(0,Ship.Type.AirCraftCarrier,Ship.Direction.Up),
+                                placingRow,placingCol,board2))
+                        {
+                            placing = true;
+                            placeStatus++;
+                        }
+                        else
+                        {
+                            board2[placingRow][placingCol] = null;
+                            placing = true;
+                        }
+                    }
+                    else if(placeStatus == 1)
+                    {
+                        if(placeShip(new Ship(0,Ship.Type.BattleCarrier,Ship.Direction.Up),
+                                placingRow,placingCol,board2))
+                        {
+                            placing = true;
+                            placeStatus++;
+                        }
+                        else
+                        {
+                            board2[placingRow][placingCol] = null;
+                            placing = true;
+                        }
+                    }
+                    else if(placeStatus == 2)
+                    {
+                        if(placeShip(new Ship(0,Ship.Type.Floater,Ship.Direction.Up),
+                                placingRow,placingCol,board2))
+                        {
+                            placing = true;
+                            placeStatus++;
+                        }
+                        else
+                        {
+                            board2[placingRow][placingCol] = null;
+                            placing = true;
+                        }
+                    }
+                    else if(placeStatus == 3)
+                    {
+                        if(placeShip(new Ship(0,Ship.Type.Pontoon,Ship.Direction.Up),
+                                placingRow,placingCol,board2))
+                        {
+                            placing = true;
+                            placeStatus++;
+                            play = true;
+                        }
+                        else
+                        {
+                            board2[placingRow][placingCol] = null;
+                            placing = true;
+                        }
+                    }
+                }
+                if (e.VK_DOWN == e.getKeyCode())
+                {
+                    
+                    if(placeStatus == 0)
+                    {
+                        if(placeShip(new Ship(0,Ship.Type.AirCraftCarrier,Ship.Direction.Down),
+                                placingRow,placingCol,board2))
+                        {
+                            placing = true;
+                            placeStatus++;
+                        }
+                        else
+                        {
+                            board2[placingRow][placingCol] = null;
+                            placing = true;
+                        }
+                    }
+                    else if(placeStatus == 1)
+                    {
+                        if(placeShip(new Ship(0,Ship.Type.BattleCarrier,Ship.Direction.Down),
+                                placingRow,placingCol,board2))
+                        {
+                            placing = true;
+                            placeStatus++;
+                        }
+                        else
+                        {
+                            board2[placingRow][placingCol] = null;
+                            placing = true;
+                        }
+                    }
+                    else if(placeStatus == 2)
+                    {
+                        if(placeShip(new Ship(0,Ship.Type.Floater,Ship.Direction.Down),
+                                placingRow,placingCol,board2))
+                        {
+                            placing = true;
+                            placeStatus++;
+                        }
+                        else
+                        {
+                            board2[placingRow][placingCol] = null;
+                            placing = true;
+                        }
+                    }
+                    else if(placeStatus == 3)
+                    {
+                        if(placeShip(new Ship(0,Ship.Type.Pontoon,Ship.Direction.Down),
+                                placingRow,placingCol,board2))
+                        {
+                            placing = true;
+                            placeStatus++;
+                            play = true;
+                        }
+                        else
+                        {
+                            board2[placingRow][placingCol] = null;
+                            placing = true;
+                        }
+                    }
+                }
+                if (e.VK_LEFT == e.getKeyCode())
+                {
+                    
+                    if(placeStatus == 0)
+                    {
+                        if(placeShip(new Ship(0,Ship.Type.AirCraftCarrier,Ship.Direction.Left),
+                                placingRow,placingCol,board2))
+                        {
+                            placing = true;
+                            placeStatus++;
+                        }
+                        else
+                        {
+                            board2[placingRow][placingCol] = null;
+                            placing = true;
+                        }
+                    }
+                    else if(placeStatus == 1)
+                    {
+                        if(placeShip(new Ship(0,Ship.Type.BattleCarrier,Ship.Direction.Left),
+                                placingRow,placingCol,board2))
+                        {
+                            placing = true;
+                            placeStatus++;
+                        }
+                        else
+                        {
+                            board2[placingRow][placingCol] = null;
+                            placing = true;
+                        }
+                    }
+                    else if(placeStatus == 2)
+                    {
+                        if(placeShip(new Ship(0,Ship.Type.Floater,Ship.Direction.Left),
+                                placingRow,placingCol,board2))
+                        {
+                            placing = true;
+                            placeStatus++;
+                        }
+                        else
+                        {
+                            board2[placingRow][placingCol] = null;
+                            placing = true;
+                        }
+                    }
+                    else if(placeStatus == 3)
+                    {
+                        if(placeShip(new Ship(0,Ship.Type.Pontoon,Ship.Direction.Left),
+                                placingRow,placingCol,board2))
+                        {
+                            placing = true;
+                            placeStatus++;
+                            play = true;
+                        }
+                        else
+                        {
+                            board2[placingRow][placingCol] = null;
+                            placing = true;
+                        }
+                    }
+                }
                 if (e.VK_RIGHT == e.getKeyCode())
                 {
                     
+                    if(placeStatus == 0)
+                    {
+                        if(placeShip(new Ship(0,Ship.Type.AirCraftCarrier,Ship.Direction.Right),
+                                placingRow,placingCol,board2))
+                        {
+                            placing = true;
+                            placeStatus++;
+                        }
+                        else
+                        {
+                            board2[placingRow][placingCol] = null;
+                            placing = true;
+                        }
+                    }
+                    else if(placeStatus == 1)
+                    {
+                        if(placeShip(new Ship(0,Ship.Type.BattleCarrier,Ship.Direction.Right),
+                                placingRow,placingCol,board2))
+                        {
+                            placing = true;
+                            placeStatus++;
+                        }
+                        else
+                        {
+                            board2[placingRow][placingCol] = null;
+                            placing = true;
+                        }
+                    }
+                    else if(placeStatus == 2)
+                    {
+                        if(placeShip(new Ship(0,Ship.Type.Floater,Ship.Direction.Right),
+                                placingRow,placingCol,board2))
+                        {
+                            placing = true;
+                            placeStatus++;
+                        }
+                        else
+                        {
+                            board2[placingRow][placingCol] = null;
+                            placing = true;
+                        }
+                    }
+                    else if(placeStatus == 3)
+                    {
+                        if(placeShip(new Ship(0,Ship.Type.Pontoon,Ship.Direction.Right),
+                                placingRow,placingCol,board2))
+                        {
+                            placing = true;
+                            placeStatus++;
+                            play = true;
+                        }
+                        else
+                        {
+                            board2[placingRow][placingCol] = null;
+                            placing = true;
+                        }
+                    }
                 }
                 if (e.VK_B == e.getKeyCode())
                 {
-                  
+                  play= !play;
                 }
                 if (e.VK_V == e.getKeyCode())
                 {
@@ -238,23 +493,15 @@ public class BattleShip extends JFrame implements Runnable {
                 {
                     if (board1[zrow][zcolumn] != null)
                     {                   
-                        if(!board1[zrow][zcolumn].getHit())
-                        {
-                            g.setColor(Color.BLUE);
-                            g.fillRect(getX(0)+zcolumn*(getWidth2()/2)/numColumns,
-                            getY(topborderlength)+zrow*(getHeight2()-topborderlength)/numRows,
-                            (getWidth2()/2)/numColumns,
-                            (getHeight2()-topborderlength)/numRows);
-                        }          
-                        else if(board1[zrow][zcolumn].getType() == Ship.Type.Miss)
+                        if(board1[zrow][zcolumn].getType() == Ship.Type.Miss)
                         {
                             g.setColor(Color.GREEN);
                             g.fillRect(getX(0)+zcolumn*(getWidth2()/2)/numColumns,
                             getY(topborderlength)+zrow*(getHeight2()-topborderlength)/numRows,
                             (getWidth2()/2)/numColumns,
                             (getHeight2()-topborderlength)/numRows);
-                        }     
-                        else
+                        }  
+                        else if(board1[zrow][zcolumn].getHit())
                         {
                             g.setColor(Color.RED);
                             g.fillRect(getX(0)+zcolumn*(getWidth2()/2)/numColumns,
@@ -301,30 +548,34 @@ public class BattleShip extends JFrame implements Runnable {
         gOld.drawImage(image, 0, 0, null);
     }
     
-    public void placeShip(Ship _ship,int startRow,int startCol,Ship[][] board)
+    public boolean placeShip(Ship _ship,int startRow,int startCol,Ship[][] board)
     {
+        boolean place = false;
         if(_ship.getDirection() == Ship.Direction.Down
-            && startRow+_ship.getSize()<numRows)
+            && startRow+_ship.getSize()<numRows+1)
         {
             for(int index = 0;index<_ship.getSize();index++)
             {
                 board[startRow+index][startCol] = new Ship(index,_ship.getType(),_ship.getDirection());
+                place = true;
             }
         }
         else if(_ship.getDirection() == Ship.Direction.Up
-            && startRow-_ship.getSize()>0)
+            && startRow-_ship.getSize()>-2)
         {
             for(int index = 0;index<_ship.getSize();index++)
             {
                 board[startRow-index][startCol] = new Ship(index,_ship.getType(),_ship.getDirection());
+                place = true;
             }
         }
         else if(_ship.getDirection() == Ship.Direction.Left
-            && startCol-_ship.getSize()>0)
+            && startCol-_ship.getSize()>=0)
         {
             for(int index = 0;index<_ship.getSize();index++)
             {
                 board[startRow][startCol-index] = new Ship(index,_ship.getType(),_ship.getDirection());
+                place = true;
             }
         }
         else if(_ship.getDirection() == Ship.Direction.Right
@@ -333,8 +584,10 @@ public class BattleShip extends JFrame implements Runnable {
             for(int index = 0;index<_ship.getSize();index++)
             {
                 board[startRow][startCol+index] = new Ship(index,_ship.getType(),_ship.getDirection());
+                place = true;
             }
         }
+        return place;
     }
 /////////////////////////////////////////////////////////////////////
 // needed for     implement runnable
@@ -356,6 +609,9 @@ public class BattleShip extends JFrame implements Runnable {
         numShips=5;
         startMenu=true;
         borderColor = Color.BLACK;
+        play = false;
+        placing = true;
+        placeStatus = 0;
         
         board1=new Ship[numRows][numColumns];
         board2=new Ship[numRows][numColumns];
@@ -371,9 +627,9 @@ public class BattleShip extends JFrame implements Runnable {
         player2 = new Ship[numShips];
         
         placeShip(new Ship(0,Ship.Type.AirCraftCarrier,Ship.Direction.Down),0,0,board1);
-        placeShip(new Ship(0,Ship.Type.AirCraftCarrier,Ship.Direction.Down),0,0,board2);
-        
-        
+        placeShip(new Ship(0,Ship.Type.BattleCarrier,Ship.Direction.Right),1,1,board1);
+        placeShip(new Ship(0,Ship.Type.StandardShip,Ship.Direction.Down),2,2,board1);
+        placeShip(new Ship(0,Ship.Type.Floater,Ship.Direction.Right),3,3,board1);
     }
 /////////////////////////////////////////////////////////////////////////
     public void animate() {
