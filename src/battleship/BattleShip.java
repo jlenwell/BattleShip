@@ -4,6 +4,7 @@
  */
 package battleship;
 
+import battleship.AI.*;
 import java.io.*;
 import java.awt.*;
 import java.awt.geom.*;
@@ -30,6 +31,7 @@ public class BattleShip extends JFrame implements Runnable {
     final int sideborderlength2 = 50;
     boolean startMenu;
     boolean play;
+    AI ai;
     
     boolean placing;
     int placingRow;
@@ -80,15 +82,16 @@ public class BattleShip extends JFrame implements Runnable {
                         {    
                             col = xpos/xdelta;
                             row = (ypos-topborderlength)/ydelta;
-                            if(board1[row][col] != null)
+                            if(board1[row][col] != null && board1[row][col].getType() != Ship.Type.Miss)
                             {
                                 board1[row][col].shoot();
+                                ai.fire(board2);
                             }
                             else
                             {
                                 board1[row][col] = new Ship(0,Ship.Type.Miss);
+                                ai.fire(board2);
                             }
-//                            ai.fire()
                         }
                         else if(xpos >= getWidth2()/2 && !play && placing)
                         {
@@ -509,6 +512,15 @@ public class BattleShip extends JFrame implements Runnable {
                             (getWidth2()/2)/numColumns,
                             (getHeight2()-topborderlength)/numRows);
                         }
+                        else
+                        {
+                            
+                            g.setColor(Color.CYAN);
+                            g.fillRect(getX(0)+zcolumn*(getWidth2()/2)/numColumns,
+                            getY(topborderlength)+zrow*(getHeight2()-topborderlength)/numRows,
+                            (getWidth2()/2)/numColumns,
+                            (getHeight2()-topborderlength)/numRows);
+                        }
                     }  
                 }
                 {
@@ -547,7 +559,13 @@ public class BattleShip extends JFrame implements Runnable {
         
         gOld.drawImage(image, 0, 0, null);
     }
-    
+    public void PlaceOpponentShips(Ship[][] board)
+    {
+        int randrow = (int)(Math.random()*numRows);
+        int randcol = (int)(Math.random()*numColumns);
+        
+        placeShip(new Ship(0,Ship.Type.Floater,Ship.Direction.Right),randrow,randcol,board2);
+    }
     public boolean placeShip(Ship _ship,int startRow,int startCol,Ship[][] board)
     {
         boolean place = false;
@@ -570,7 +588,7 @@ public class BattleShip extends JFrame implements Runnable {
             }
         }
         else if(_ship.getDirection() == Ship.Direction.Left
-            && startCol-_ship.getSize()>=0)
+            && startCol-_ship.getSize()>=-1)
         {
             for(int index = 0;index<_ship.getSize();index++)
             {
@@ -579,7 +597,7 @@ public class BattleShip extends JFrame implements Runnable {
             }
         }
         else if(_ship.getDirection() == Ship.Direction.Right
-            && startCol+_ship.getSize()<numColumns)
+            && startCol+_ship.getSize()<numColumns+1)
         {
             for(int index = 0;index<_ship.getSize();index++)
             {
@@ -612,6 +630,7 @@ public class BattleShip extends JFrame implements Runnable {
         play = false;
         placing = true;
         placeStatus = 0;
+        ai = new AI(AI.Difficulty.Medium);
         
         board1=new Ship[numRows][numColumns];
         board2=new Ship[numRows][numColumns];
