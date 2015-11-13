@@ -73,16 +73,17 @@ public class BattleShip extends JFrame implements Runnable {
                         {    
                             col = xpos/xdelta;
                             row = ypos/ydelta;
-                            board1[row][col] = new Ship(5);
+                            if(board1[row][col] != null)
+                                board1[row][col].shoot();
+                            else 
+                                board1[row][col] = new Ship(0,Ship.Type.Miss);
                         }
                         else
                         {
                             col = xpos/xdelta;
                             row = ypos/ydelta;
-                            board2[row][col] = new Ship(5);
                         }
                     }
-                    board1[row][col] = new Ship(5);
                     
                 }
                 if (e.BUTTON3 == e.getButton()) {
@@ -197,7 +198,7 @@ public class BattleShip extends JFrame implements Runnable {
         
         
 //drawing horizontal vertical lines board1
-        int offset = 20;
+        int length = 10;
         for (int zi=0;zi<numRows;zi++)
         {
             g.drawLine(getX(0) ,getY(topborderlength)+zi*(getHeight2()-topborderlength)/numRows ,
@@ -210,7 +211,7 @@ public class BattleShip extends JFrame implements Runnable {
         }      
         
         g.setColor(Color.blue);
-        g.fillRect(getWidth2()/2+offset, getY(topborderlength), getWidth2()/1000+offset, getHeight2());
+        g.fillRect(getWidth2()/2-(length)+30, getY(topborderlength),length, getHeight2());
         
         //drawing horizontal and vertical lines board2
         g.setColor(Color.blue);
@@ -235,10 +236,17 @@ public class BattleShip extends JFrame implements Runnable {
             {
                 if (board1[zrow][zcolumn] != null)
                 {                   
-                    drawShip(getX(sideborderlength)+zcolumn*getWidth2()/numColumns,
-                    getY(topborderlength-25)+zrow*getHeight2()/numRows,
+                    g.fillRect(getX(0)+zcolumn*(getWidth2()/2)/numColumns,
+                    getY(topborderlength)+zrow*(getHeight2()-topborderlength)/numRows,
                     (getWidth2()/2)/numColumns,
-                    ((getHeight2()*2/3))/numRows);
+                    (getHeight2()-topborderlength)/numRows);
+                }  
+                if (board2[zrow][zcolumn] != null)
+                {                   
+                    g.fillRect(getX(getWidth2()/2)+zcolumn*(getWidth2()/2)/numColumns,
+                    getY(topborderlength)+zrow*(getHeight2()-topborderlength)/numRows,
+                    (getWidth2()/2)/numColumns,
+                    (getHeight2()-topborderlength)/numRows);
                 }              
             }
         }
@@ -318,16 +326,11 @@ public void drawShip(int xleft,int ytop,int xlength,int ywidth)
                 board2[zrow][zcol] = null;
             }
         }
-        board1[1][0] = new Ship(1);
-        board1[2][0] = new Ship(1);
-        
-        
         player1 = new Ship[numShips];
         player2 = new Ship[numShips];
-        for(int index=0;index<numShips;index++){
-            player1[index]=new Ship(index+1);
-            player1[index]=new Ship(index+1);
-        }
+        
+        placeShip(new Ship(0,Ship.Type.AirCraftCarrier,Ship.Direction.Down),0,0,board1);
+        placeShip(new Ship(0,Ship.Type.AirCraftCarrier,Ship.Direction.Down),0,0,board2);
         
     }
 /////////////////////////////////////////////////////////////////////////
