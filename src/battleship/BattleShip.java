@@ -69,9 +69,15 @@ public class BattleShip extends JFrame implements Runnable {
                     int ydelta = (getHeight2()-topborderlength)/numRows;
                     int xdelta = (getWidth2()/2)/numColumns;
                     currentMouseColumn = xpos/xdelta;
-//                    int row = ypos/ydelta;
+                    int row = ypos/ydelta;
                     currentMouseRow = numRows - 1;
-                    
+                    if(ypos <=topborderlength )
+                    {
+                        if()
+                        {    
+                            board1[currentMouseRow][currentMouseColumn] = new Ship(5);
+                        }
+                    }
                     board1[currentMouseRow][currentMouseColumn] = new Ship(5);
                     
                 }
@@ -225,7 +231,7 @@ public class BattleShip extends JFrame implements Runnable {
             {
                 if (board1[zrow][zcolumn] != null)
                 {                   
-                    Ship.drawShip(g,getX(sideborderlength)+zcolumn*getWidth2()/numColumns,
+                    drawShip(getX(sideborderlength)+zcolumn*getWidth2()/numColumns,
                     getY(topborderlength-25)+zrow*getHeight2()/numRows,
                     (getWidth2()/2)/numColumns,
                     ((getHeight2()*2/3))/numRows);
@@ -253,10 +259,10 @@ public class BattleShip extends JFrame implements Runnable {
         }
     }
 ////////////////////////////////////////////////////////////////////    
-public static void drawShip(Graphics2D g,int xleft,int xtop,int yleft,int ytop)
+public void drawShip(int xleft,int ytop,int xlength,int ywidth)
     {
         g.setColor(Color.yellow);
-        g.fillRect(xleft, xtop , yleft , ytop);
+        g.fillRect(xleft, ytop , xlength , ytop);
     }    
 /////////////////////////////////////////////////////////////////////////
     public void reset() {
