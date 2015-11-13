@@ -92,34 +92,46 @@ public class AI {
         {
             if(fireEasy(board))
             {
-                if(board[lastRow+1][lastColumn] != null)
-                    activeTargets[numTargets] = !board[lastRow+1][lastColumn].getHit();
-                else
-                    activeTargets[numTargets] = true;
-                targetPositions[numTargets][0] = lastRow+1;
-                targetPositions[numTargets][1] = lastColumn;
-                targets[numTargets++] = board[lastRow+1][lastColumn];
-                if(board[lastRow-1][lastColumn] != null)
-                    activeTargets[numTargets] = !board[lastRow-1][lastColumn].getHit();
-                else
-                    activeTargets[numTargets] = true;
-                targetPositions[numTargets][0] = lastRow-1;
-                targetPositions[numTargets][1] = lastColumn;
-                targets[numTargets++] = board[lastRow-1][lastColumn];
-                if(board[lastRow][lastColumn+1] != null)
-                    activeTargets[numTargets] = !board[lastRow][lastColumn+1].getHit();
-                else
-                    activeTargets[numTargets] = true;
-                targetPositions[numTargets][0] = lastRow;
-                targetPositions[numTargets][1] = lastColumn+1;
-                targets[numTargets++] = board[lastRow][lastColumn+1];
-                if(board[lastRow][lastColumn-1] != null)
-                    activeTargets[numTargets] = !board[lastRow][lastColumn-1].getHit();
-                else 
-                    activeTargets[numTargets] = true;
-                targetPositions[numTargets][0] = lastRow;
-                targetPositions[numTargets][1] = lastColumn-1;
-                targets[numTargets++] = board[lastRow][lastColumn-1];
+                if(lastRow != board.length)
+                {
+                    if(board[lastRow+1][lastColumn] != null)
+                        activeTargets[numTargets] = !board[lastRow+1][lastColumn].getHit();
+                    else
+                        activeTargets[numTargets] = true;
+                    targetPositions[numTargets][0] = lastRow+1;
+                    targetPositions[numTargets][1] = lastColumn;
+                    targets[numTargets++] = board[lastRow+1][lastColumn];
+                }
+                if(lastRow != 0)
+                {
+                    if(board[lastRow-1][lastColumn] != null)
+                        activeTargets[numTargets] = !board[lastRow-1][lastColumn].getHit();
+                    else
+                        activeTargets[numTargets] = true;
+                    targetPositions[numTargets][0] = lastRow-1;
+                    targetPositions[numTargets][1] = lastColumn;
+                    targets[numTargets++] = board[lastRow-1][lastColumn];
+                }
+                if(lastColumn != board[lastRow].length)
+                {
+                    if(board[lastRow][lastColumn+1] != null)
+                        activeTargets[numTargets] = !board[lastRow][lastColumn+1].getHit();
+                    else
+                        activeTargets[numTargets] = true;
+                    targetPositions[numTargets][0] = lastRow;
+                    targetPositions[numTargets][1] = lastColumn+1;
+                    targets[numTargets++] = board[lastRow][lastColumn+1];
+                }
+                if(lastColumn != 0)
+                {
+                    if(board[lastRow][lastColumn-1] != null)
+                        activeTargets[numTargets] = !board[lastRow][lastColumn-1].getHit();
+                    else 
+                        activeTargets[numTargets] = true;
+                    targetPositions[numTargets][0] = lastRow;
+                    targetPositions[numTargets][1] = lastColumn-1;
+                    targets[numTargets++] = board[lastRow][lastColumn-1];
+                }
             }
         }
         else
@@ -165,35 +177,46 @@ public class AI {
                 lastRow = targetPositions[rand][0];
                 lastColumn = targetPositions[rand][1];
                 targets[rand].shoot();
-                if(board[lastRow+1][lastColumn] != null)
-                    activeTargets[numTargets] = !board[lastRow+1][lastColumn].getHit();
-                else
-                    activeTargets[numTargets] = true;
-                targetPositions[numTargets][0] = lastRow+1;
-                targetPositions[numTargets][1] = lastColumn;
-                targets[numTargets++] = board[lastRow+1][lastColumn];
-                if(board[lastRow-1][lastColumn] != null)
-                    activeTargets[numTargets] = !board[lastRow-1][lastColumn].getHit();
-                else
-                    activeTargets[numTargets] = true;
-                targetPositions[numTargets][0] = lastRow-1;
-                targetPositions[numTargets][1] = lastColumn;
-                targets[numTargets++] = board[lastRow-1][lastColumn];
-                if(board[lastRow][lastColumn+1] != null)
-                    activeTargets[numTargets] = !board[lastRow][lastColumn+1].getHit();
-                else
-                    activeTargets[numTargets] = true;
-                targetPositions[numTargets][0] = lastRow;
-                targetPositions[numTargets][1] = lastColumn+1;
-                targets[numTargets++] = board[lastRow][lastColumn+1];
-                if(board[lastRow][lastColumn-1] != null)
-                    activeTargets[numTargets] = !board[lastRow][lastColumn-1].getHit();
-                else 
-                    activeTargets[numTargets] = true;
-                targetPositions[numTargets][0] = lastRow;
-                targetPositions[numTargets][1] = lastColumn-1;
-                targets[numTargets++] = board[lastRow][lastColumn-1];
-                
+                if(lastRow != board.length)
+                {
+                    if(board[lastRow+1][lastColumn] != null)
+                        activeTargets[numTargets] = !board[lastRow+1][lastColumn].getHit();
+                    else
+                        activeTargets[numTargets] = true;
+                    targetPositions[numTargets][0] = lastRow+1;
+                    targetPositions[numTargets][1] = lastColumn;
+                    targets[numTargets++] = board[lastRow+1][lastColumn];
+                }
+                if(lastRow != 0)
+                {
+                    if(board[lastRow-1][lastColumn] != null)
+                        activeTargets[numTargets] = !board[lastRow-1][lastColumn].getHit();
+                    else
+                        activeTargets[numTargets] = true;
+                    targetPositions[numTargets][0] = lastRow-1;
+                    targetPositions[numTargets][1] = lastColumn;
+                    targets[numTargets++] = board[lastRow-1][lastColumn];
+                }
+                if(lastColumn != board[lastRow].length)
+                {
+                    if(board[lastRow][lastColumn+1] != null)
+                        activeTargets[numTargets] = !board[lastRow][lastColumn+1].getHit();
+                    else
+                        activeTargets[numTargets] = true;
+                    targetPositions[numTargets][0] = lastRow;
+                    targetPositions[numTargets][1] = lastColumn+1;
+                    targets[numTargets++] = board[lastRow][lastColumn+1];
+                }
+                if(lastColumn != 0)
+                {
+                    if(board[lastRow][lastColumn-1] != null)
+                        activeTargets[numTargets] = !board[lastRow][lastColumn-1].getHit();
+                    else 
+                        activeTargets[numTargets] = true;
+                    targetPositions[numTargets][0] = lastRow;
+                    targetPositions[numTargets][1] = lastColumn-1;
+                    targets[numTargets++] = board[lastRow][lastColumn-1];
+                }
             }
         }
     }
