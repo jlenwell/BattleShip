@@ -57,6 +57,7 @@ public class BattleShip extends JFrame implements Runnable {
         frame1 = new BattleShip();
         frame1.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
         frame1.setVisible(true);
     }
 
@@ -71,7 +72,12 @@ public class BattleShip extends JFrame implements Runnable {
                               helpMenu=false;
                               screenPresent=true;
                           }
-                          
+                          if( helpMenu == true && e.getX() > (getX(getWidth2()/2))-200 && e.getX() <  ((getX(getWidth2()/2))-200)+100 && e.getY() > 
+                              (getHeight2()/2)+400 && e.getY() < ((getHeight2()/2)+400)+50  )
+                          {
+                              helpMenu=false;
+                              screenPresent=false;
+                          }
                     if(screenPresent)
                   {    
                       
@@ -259,10 +265,16 @@ public class BattleShip extends JFrame implements Runnable {
               g.setColor(newColor);
 //              g.fillRect((getX(getWidth2()/2))-500, (getHeight2()/2)+300, 100, 50);
               g.fillRect((getX(getWidth2()/2))+200, (getHeight2()/2)+400, 100, 50);
-            
+               g.fillRect((getX(getWidth2()/2))-200, (getHeight2()/2)+400, 100, 50);
+              g.setColor(Color.white);
+              g.drawString("To place ship click where you want to put it and then use the desired arrow keys.",getX(1) ,getY(100));
+              g.drawString("The order of placing your ships is biggest to smallest", getX(1) ,getY(150));
+              g.drawString("Once the game is over hit escape to go back to the main menu  ",getX(1) ,getY(200));
               g.setColor(Color.black);
           
               g.drawString("Menu",(getX(getWidth2()/2))+200 ,(getHeight2()/2)+430);
+              g.drawString("Game",(getX(getWidth2()/2))-200 ,(getHeight2()/2)+430);
+              
               
           }
         
