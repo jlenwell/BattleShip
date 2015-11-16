@@ -44,10 +44,13 @@ public class BattleShip extends JFrame implements Runnable {
     int mouseXPos;
     int mouseYPos;
     
-    int currentMouseColumn;
-    int currentMouseRow;
-    
-    int winconnect;
+    boolean p1victory;
+    boolean cvictory;
+    boolean gameover;
+    boolean yourTurn;
+    boolean placing;
+    int playerscore;
+    int cscore;
     
     static BattleShip frame1;
     public static void main(String[] args) {
@@ -228,6 +231,45 @@ public class BattleShip extends JFrame implements Runnable {
             }
         }
 
+        if (p1victory)
+        {
+            gameover = true;
+            g.setColor(Color.black);
+            g.setFont(new Font("Monospaced",Font.BOLD,60) );
+            g.drawString("Player Victory", 400, 500);            
+        }
+        else if(cvictory)
+        {
+            gameover = true;
+            g.setColor(Color.black);
+            g.setFont(new Font("Monospaced",Font.BOLD,60) );
+            g.drawString("Player defeated", 400, 500);            
+        } 
+        if (yourTurn)
+        {            
+            g.setColor(Color.black);
+            g.setFont(new Font("Monospaced",Font.BOLD,30) );
+            g.drawString("Your Turn", 1000, 200);            
+        }   
+        if(placing)
+        {            
+            g.setColor(Color.black);
+            g.setFont(new Font("Monospaced",Font.BOLD,30) );
+            g.drawString("placing ships", 1000, 250);            
+        }
+        {
+            g.setColor(Color.black);
+            g.setFont(new Font("Monospaced",Font.BOLD,30) );
+            g.drawString("player score:"+ playerscore, 1000, 250);
+            
+        }
+        {
+            g.setColor(Color.black);
+            g.setFont(new Font("Monospaced",Font.BOLD,30) );
+            g.drawString("player score:"+ playerscore, 1000, 250);
+            
+        }
+        
           
         
         gOld.drawImage(image, 0, 0, null);
@@ -251,7 +293,12 @@ public class BattleShip extends JFrame implements Runnable {
     public void reset() {
         numShips=5;
         startMenu=true;
-        
+        gameover = false;
+        p1victory = true;
+        yourTurn = true;
+        placing = true;
+        playerscore = 0;
+        cscore = 0;
         board1=new Ship[numRows][numColumns];
         board2=new Ship[numRows][numColumns];
         for(int zrow=0;zrow<numRows;zrow++)
@@ -286,6 +333,12 @@ public class BattleShip extends JFrame implements Runnable {
             reset();
         }
         topborderlength = getHeight2()*4/10;
+        if(gameover)
+            return;
+        if(p1victory)
+            playerscore+=1;
+        if(cvictory)
+            cscore+=1;
     }
 
 ////////////////////////////////////////////////////////////////////////////
