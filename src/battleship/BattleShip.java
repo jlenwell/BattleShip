@@ -563,8 +563,7 @@ public class BattleShip extends JFrame implements Runnable {
     {
         int randrow = (int)(Math.random()*numRows);
         int randcol = (int)(Math.random()*numColumns);
-        
-        placeShip(new Ship(0,Ship.Type.Floater,Ship.Direction.Right),randrow,randcol,board2);
+        while(!placeShip(new Ship(0,Ship.Type.Floater,Ship.Direction.Right),randrow,randcol,board1));
     }
     public boolean placeShip(Ship _ship,int startRow,int startCol,Ship[][] board)
     {
