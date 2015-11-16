@@ -30,6 +30,7 @@ public class BattleShip extends JFrame implements Runnable {
     
     boolean startMenu;
     boolean pressStart;
+    boolean helpMenu;
     
     Ship board1[][];
     Ship board2[][];
@@ -40,6 +41,7 @@ public class BattleShip extends JFrame implements Runnable {
     Ship player2[];
     Image battleShipImage;
     Image battleShipImage2;
+    Image johnCena;
     boolean turn;
     boolean screenPresent;
     int mouseXPos;
@@ -63,12 +65,29 @@ public class BattleShip extends JFrame implements Runnable {
         addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
                 if (e.BUTTON1 == e.getButton()) {
-                  if(screenPresent)
-                  {
+                  if( helpMenu == true && e.getX() > (getX(getWidth2()/2))+200 && e.getX() <  ((getX(getWidth2()/2))+200)+100 && e.getY() > 
+                              (getHeight2()/2)+400 && e.getY() < ((getHeight2()/2)+400)+50  )
+                          {
+                              helpMenu=false;
+                              screenPresent=true;
+                          }
+                          
+                    if(screenPresent)
+                  {    
+                      
+                      if(e.getX() > (getX(getWidth2()/2))+200 && e.getX() <  ((getX(getWidth2()/2))+200)+100 && e.getY() > 
+                              (getHeight2()/2)+300 && e.getY() < ((getHeight2()/2)+300)+50  )
+                      {
+                          screenPresent= false;
+                          helpMenu=true;
+                         
+                          
+                      }
                       if(e.getX() >(getX(getWidth2()/2))-500 && e.getX()<  ((getX(getWidth2()/2))-500)+100 && e.getY() > 
                               (getHeight2()/2)+300 && e.getY() < ((getHeight2()/2)+300)+50)
                       {
                           screenPresent= false;
+                          
                       }
                   }
                     
@@ -229,6 +248,24 @@ public class BattleShip extends JFrame implements Runnable {
               g.drawString("Help",(getX(getWidth2()/2))+200 ,(getHeight2()/2)+330);
               
           }
+          if (helpMenu)
+          { 
+              
+             g.fillRect(getX(0),getY(0),
+                getWidth2(),getHeight2());
+             g.drawImage(johnCena,getX(0),getY(0),
+                getWidth2(),getHeight2(),this);
+              Color newColor = new Color (87,206,187);
+              g.setColor(newColor);
+//              g.fillRect((getX(getWidth2()/2))-500, (getHeight2()/2)+300, 100, 50);
+              g.fillRect((getX(getWidth2()/2))+200, (getHeight2()/2)+400, 100, 50);
+            
+              g.setColor(Color.black);
+          
+              g.drawString("Menu",(getX(getWidth2()/2))+200 ,(getHeight2()/2)+430);
+              
+          }
+        
         
         gOld.drawImage(image, 0, 0, null);
     }
@@ -252,6 +289,7 @@ public class BattleShip extends JFrame implements Runnable {
         numShips=5;
         startMenu=true;
         screenPresent=true;
+        helpMenu = false;
         board1=new Ship[numRows][numColumns];
         board2=new Ship[numRows][numColumns];
         for(int zrow=0;zrow<numRows;zrow++)
@@ -282,7 +320,7 @@ public class BattleShip extends JFrame implements Runnable {
                 ysize = getSize().height;
             }
             battleShipImage2 = Toolkit.getDefaultToolkit().getImage("./battleship2.jpg");
-      
+            johnCena = Toolkit.getDefaultToolkit().getImage("./original.png");
             battleShipImage = Toolkit.getDefaultToolkit().getImage("./battleShip.png");
             reset();
         }
