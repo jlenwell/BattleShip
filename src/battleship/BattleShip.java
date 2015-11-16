@@ -31,6 +31,8 @@ public class BattleShip extends JFrame implements Runnable {
     final int sideborderlength2 = 50;
     boolean startMenu;
     boolean play;
+    boolean gameOver;
+    boolean youWin;
     AI ai;
     
     boolean placing;
@@ -512,15 +514,6 @@ public class BattleShip extends JFrame implements Runnable {
                             (getWidth2()/2)/numColumns,
                             (getHeight2()-topborderlength)/numRows);
                         }
-                        else
-                        {
-                            
-                            g.setColor(Color.CYAN);
-                            g.fillRect(getX(0)+zcolumn*(getWidth2()/2)/numColumns,
-                            getY(topborderlength)+zrow*(getHeight2()-topborderlength)/numRows,
-                            (getWidth2()/2)/numColumns,
-                            (getHeight2()-topborderlength)/numRows);
-                        }
                     }  
                 }
                 {
@@ -559,11 +552,100 @@ public class BattleShip extends JFrame implements Runnable {
         
         gOld.drawImage(image, 0, 0, null);
     }
+    public boolean checkWin(Ship[][] board)
+    {
+
+        boolean win = true;
+        for(int zrow=0;zrow<board.length;zrow++)
+        {
+            for(int zcolumn=0;zcolumn<board[zrow].length;zcolumn++)
+            {
+                if (board[zrow][zcolumn] != null && !board[zrow][zcolumn].getHit())
+                {       
+                    win = false;
+                }
+            }
+        }
+        return win;
+    }    
     public void PlaceOpponentShips(Ship[][] board)
     {
         int randrow = (int)(Math.random()*numRows);
         int randcol = (int)(Math.random()*numColumns);
-        while(!placeShip(new Ship(0,Ship.Type.Floater,Ship.Direction.Right),randrow,randcol,board1));
+        int randDir = (int)(Math.random()*4);
+        if(randDir == 0)
+        {
+            while(!placeShip(new Ship(0,Ship.Type.BattleCarrier,Ship.Direction.Right),randrow,randcol,board1));
+        }
+        else if(randDir == 1)
+        {
+            while(!placeShip(new Ship(0,Ship.Type.BattleCarrier,Ship.Direction.Left),randrow,randcol,board1));
+        }
+        else if(randDir == 2)
+        {
+            while(!placeShip(new Ship(0,Ship.Type.BattleCarrier,Ship.Direction.Up),randrow,randcol,board1));
+        }
+        else
+        {
+            while(!placeShip(new Ship(0,Ship.Type.BattleCarrier,Ship.Direction.Down),randrow,randcol,board1));
+        }
+        randrow = (int)(Math.random()*numRows);
+        randcol = (int)(Math.random()*numColumns);
+        randDir = (int)(Math.random()*4);
+        if(randDir == 0)
+        {
+            while(!placeShip(new Ship(0,Ship.Type.AirCraftCarrier,Ship.Direction.Right),randrow,randcol,board1));
+        }
+        else if(randDir == 1)
+        {
+            while(!placeShip(new Ship(0,Ship.Type.AirCraftCarrier,Ship.Direction.Left),randrow,randcol,board1));
+        }
+        else if(randDir == 2)
+        {
+            while(!placeShip(new Ship(0,Ship.Type.AirCraftCarrier,Ship.Direction.Up),randrow,randcol,board1));
+        }
+        else
+        {
+            while(!placeShip(new Ship(0,Ship.Type.AirCraftCarrier,Ship.Direction.Down),randrow,randcol,board1));
+        }
+        randrow = (int)(Math.random()*numRows);
+        randcol = (int)(Math.random()*numColumns);
+        randDir = (int)(Math.random()*4);
+        if(randDir == 0)
+        {
+            while(!placeShip(new Ship(0,Ship.Type.Floater,Ship.Direction.Right),randrow,randcol,board1));
+        }
+        else if(randDir == 1)
+        {
+            while(!placeShip(new Ship(0,Ship.Type.Floater,Ship.Direction.Left),randrow,randcol,board1));
+        }
+        else if(randDir == 2)
+        {
+            while(!placeShip(new Ship(0,Ship.Type.Floater,Ship.Direction.Up),randrow,randcol,board1));
+        }
+        else
+        {
+            while(!placeShip(new Ship(0,Ship.Type.Floater,Ship.Direction.Down),randrow,randcol,board1));
+        }
+        randrow = (int)(Math.random()*numRows);
+        randcol = (int)(Math.random()*numColumns);
+        randDir = (int)(Math.random()*4);
+        if(randDir == 0)
+        {
+            while(!placeShip(new Ship(0,Ship.Type.Pontoon,Ship.Direction.Right),randrow,randcol,board1));
+        }
+        else if(randDir == 1)
+        {
+            while(!placeShip(new Ship(0,Ship.Type.Pontoon,Ship.Direction.Left),randrow,randcol,board1));
+        }
+        else if(randDir == 2)
+        {
+            while(!placeShip(new Ship(0,Ship.Type.Pontoon,Ship.Direction.Up),randrow,randcol,board1));
+        }
+        else
+        {
+            while(!placeShip(new Ship(0,Ship.Type.Pontoon,Ship.Direction.Down),randrow,randcol,board1));
+        }
     }
     public boolean placeShip(Ship _ship,int startRow,int startCol,Ship[][] board)
     {
@@ -630,6 +712,7 @@ public class BattleShip extends JFrame implements Runnable {
         placing = true;
         placeStatus = 0;
         ai = new AI(AI.Difficulty.Medium);
+        gameOver = false;
         
         board1=new Ship[numRows][numColumns];
         board2=new Ship[numRows][numColumns];
@@ -643,11 +726,12 @@ public class BattleShip extends JFrame implements Runnable {
         }
         player1 = new Ship[numShips];
         player2 = new Ship[numShips];
-        
-        placeShip(new Ship(0,Ship.Type.AirCraftCarrier,Ship.Direction.Down),0,0,board1);
-        placeShip(new Ship(0,Ship.Type.BattleCarrier,Ship.Direction.Right),1,1,board1);
-        placeShip(new Ship(0,Ship.Type.StandardShip,Ship.Direction.Down),2,2,board1);
-        placeShip(new Ship(0,Ship.Type.Floater,Ship.Direction.Right),3,3,board1);
+//        
+//        placeShip(new Ship(0,Ship.Type.AirCraftCarrier,Ship.Direction.Down),0,0,board1);
+//        placeShip(new Ship(0,Ship.Type.BattleCarrier,Ship.Direction.Right),1,1,board1);
+//        placeShip(new Ship(0,Ship.Type.StandardShip,Ship.Direction.Down),2,2,board1);
+//        placeShip(new Ship(0,Ship.Type.Floater,Ship.Direction.Right),3,3,board1);
+        PlaceOpponentShips(board1);
     }
 /////////////////////////////////////////////////////////////////////////
     public void animate() {
@@ -660,13 +744,13 @@ public class BattleShip extends JFrame implements Runnable {
             }
             reset();
         }
-        
-        for (int zrow = 0;zrow < numRows;zrow++)
-        {
-            for (int zcolumn = 0;zcolumn < numColumns;zcolumn++)
-            {
-                
-            }
+        if(checkWin(board1)){
+            gameOver = true;
+            youWin = true;
+        }
+        if(checkWin(board2)){
+            gameOver = true;
+            youWin = false;
         }
     }
 
